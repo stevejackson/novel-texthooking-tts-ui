@@ -13,6 +13,8 @@ gem 'turbo-rails', '~> 2.0.13'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'vite_rails', '~> 3.0.19'
 
+gem 'pragmatic_segmenter'
+
 group :development, :test do
   gem 'dotenv-rails', '~> 3.1.8'
   gem 'factory_bot_rails', '~> 6.4.4'
