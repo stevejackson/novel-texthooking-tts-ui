@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import {PlayCircleIcon} from "@heroicons/react/24/outline";
+import VerticalDivider from "./utilities/VerticalDivider";
 
 interface NovelSelectedTextPopupProps {
     selectedText: string;
@@ -35,6 +36,8 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
         <PlayCircleIcon className="text-blue-500 size-[24px]" onClick={handleTtsFetchClicked} />
     );
 
+    let translationText = "testing testing testing testing testing testingtesting testing testingtesting testing testingtesting testing testingtesting testing testingtesting testing testingtesting testing testingtesting testing testingtesting testing testing";
+
     return (
         <header className="sticky z-50 top-0 pl-5 pr-5 pt-2 pb-2">
             <div className="w-full
@@ -51,6 +54,12 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
 
                     <div className="flex-1">
                         {selectedText}
+                    </div>
+
+                    <VerticalDivider />
+
+                    <div className="flex-1">
+                        {translationText}
                     </div>
                 </div>
             </div>
