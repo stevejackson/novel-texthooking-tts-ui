@@ -46,9 +46,13 @@ const NovelApp = () => {
 
     useHotkeys('meta+v, ctrl+v', fetchFromClipboard);
 
-    const updateSelection = () => {
-        setSelection(window.getSelection().toString());
+    const updateSelection = (e) => {
+        setTimeout(() => setSelection(window.getSelection().toString(), 100));
     }
+
+    useEffect(() => {
+        document.addEventListener("contextmenu", updateSelection);
+    }, []);
 
     return (
         <div className="flex flex-col min-h-screen w-screen
