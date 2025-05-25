@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'segment_paragraphs', to: 'segmenter#segment_paragraphs'
+      get 'fetch_translation', to: 'translations#fetch'
 
       resources :tts, only: [] do
         collection do
