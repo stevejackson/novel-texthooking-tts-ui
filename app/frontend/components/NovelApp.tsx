@@ -8,7 +8,7 @@ const NovelApp = () => {
     const [novelParagraphs, setNovelParagraphs] = React.useState([]);
     const [selection, setSelection] = React.useState("");
 
-    useHotkeys('meta+v, ctrl+v', async () => {
+    const fetchFromClipboard = async () => {
         const clipboardContent = await navigator.clipboard.readText();
         console.log("Clipboard content: ", clipboardContent);
 
@@ -42,7 +42,9 @@ const NovelApp = () => {
         else {
             console.log("User decided not to replace novel text with clipboard contents.");
         }
-    });
+    }
+
+    useHotkeys('meta+v, ctrl+v', fetchFromClipboard);
 
     const updateSelection = () => {
         setSelection(window.getSelection().toString());
@@ -64,6 +66,13 @@ const NovelApp = () => {
                         p-6 cursor-pointer
                         shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
                         dark:-outline-offset-1 dark:outline-white/10">
+
+                        {(novelParagraphs === null || novelParagraphs.length === 0) && (
+                            <div>
+                                No novel has been pasted in yet.
+                                &nbsp;<a href="#" className="text-blue-500" onClick={fetchFromClipboard}>Fetch from clipboard now?</a>
+                            </div>
+                        )}
 
                         <div className="whitespace-pre-wrap"
                              onMouseUp={updateSelection}>
