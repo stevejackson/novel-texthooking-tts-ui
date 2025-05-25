@@ -75,7 +75,7 @@ const NovelApp = () => {
                         )}
 
                         <div className="whitespace-pre-wrap"
-                             onMouseUp={updateSelection}>
+                             onClick={updateSelection}>
                             {novelParagraphs.map((paragraph) =>
                                 <NovelParagraph sentences={paragraph}/>
                             )}
