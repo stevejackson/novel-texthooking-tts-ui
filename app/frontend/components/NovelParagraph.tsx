@@ -29,7 +29,7 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
 
         const post_data = {
             text: sentences.join(" "),
-            voice_id: 1501
+            voice_id: localStorage.getItem("novelReader.ttsVoiceId")
         };
 
         axios({

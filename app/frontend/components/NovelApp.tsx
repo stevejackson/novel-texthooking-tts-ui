@@ -53,6 +53,7 @@ const NovelApp = () => {
     const initializeDefaultSettings = () => {
         const novelReaderContentLanguage = localStorage.getItem("novelReader.contentLanguage");
         const novelReaderTranslationLanguage = localStorage.getItem("novelReader.translationLanguage");
+        const novelReaderTTSVoiceId = localStorage.getItem("novelReader.ttsVoiceId");
 
         if(novelReaderContentLanguage === undefined || novelReaderContentLanguage === null) {
             localStorage.setItem("novelReader.contentLanguage", "EN");
@@ -60,6 +61,10 @@ const NovelApp = () => {
 
         if(novelReaderTranslationLanguage === undefined || novelReaderTranslationLanguage === null) {
             localStorage.setItem("novelReader.translationLanguage", "ZH-HANS");
+        }
+
+        if(novelReaderTTSVoiceId === undefined || novelReaderTTSVoiceId === null) {
+            localStorage.setItem("novelReader.ttsVoiceId", "2402");
         }
     }
 

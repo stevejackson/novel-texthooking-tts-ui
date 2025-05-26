@@ -15,7 +15,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
 
         const post_data = {
             text: selectedText,
-            voice_id: 1501
+            voice_id: localStorage.getItem("novelReader.ttsVoiceId")
         };
 
         axios({
