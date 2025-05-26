@@ -50,8 +50,22 @@ const NovelApp = () => {
         setTimeout(() => setSelection(window.getSelection().toString(), 100));
     }
 
+    const initializeDefaultSettings = () => {
+        const novelReaderContentLanguage = localStorage.getItem("novelReader.contentLanguage");
+        const novelReaderTranslationLanguage = localStorage.getItem("novelReader.translationLanguage");
+
+        if(novelReaderContentLanguage === undefined || novelReaderContentLanguage === null) {
+            localStorage.setItem("novelReader.contentLanguage", "EN");
+        }
+
+        if(novelReaderTranslationLanguage === undefined || novelReaderTranslationLanguage === null) {
+            localStorage.setItem("novelReader.translationLanguage", "ZH-HANS");
+        }
+    }
+
     useEffect(() => {
         document.addEventListener("contextmenu", updateSelection);
+        initializeDefaultSettings();
     }, []);
 
     return (

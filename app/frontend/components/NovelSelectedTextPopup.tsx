@@ -38,7 +38,11 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
         axios({
             method: "get",
             url: "/api/v1/fetch_translation",
-            params: { text: selectedText },
+            params: {
+                text: selectedText,
+                content_language: localStorage.getItem("novelReader.contentLanguage"),
+                translation_language: localStorage.getItem("novelReader.translationLanguage")
+            },
             config: { 'Content-Type': 'application/json', params: {} }})
             .then(response => {
                 const result = response.data.translated_text;

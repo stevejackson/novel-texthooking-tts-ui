@@ -1,7 +1,9 @@
 class TranslationApiWrapper
-  def initialize(service:, text:)
+  def initialize(service:, text:, content_language:, translation_language:)
     @service = service
     @text = text
+    @content_language = content_language
+    @translation_language = translation_language
   end
 
   def translate
@@ -26,8 +28,8 @@ class TranslationApiWrapper
     result = conn.post do |req|
       params = {
         text: [@text],
-        source_lang: "EN",
-        target_lang: "ZH-HANS",
+        source_lang: @content_language,
+        target_lang: @translation_language,
       }
 
       req.body = params.to_json
