@@ -28,15 +28,42 @@ class TranslationApiWrapper
     result = conn.post do |req|
       params = {
         text: [@text],
-        source_lang: @content_language,
-        target_lang: @translation_language,
+        source_lang: source_lang_to_deepl_format(@content_language),
+        target_lang: target_lang_to_deepl_format(@translation_language)
       }
 
       req.body = params.to_json
     end.body
 
+    pp "Deepl API full result: "
     pp result
 
     result["translations"]&.first["text"]
+  end
+
+  def source_lang_to_deepl_format(lang)
+    case lang
+    when 'ZH-HANS'
+      'ZH'
+    when 'ZH-HANT'
+      'ZH'
+    when 'EN-US'
+      'EN'
+    when 'EN-GB'
+      'EN'
+    else
+      lang
+    end
+  end
+
+  def target_lang_to_deepl_format(lang)
+    case lang
+    when 'ZH'
+      'ZH-HANS'
+    when 'EN'
+      'EN-US'
+    else
+      lang
+    end
   end
 end

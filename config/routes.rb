@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
   resources :novels, only: [:index]
+  resources :settings, only: [:index]
   resources :texthooker, only: [:index]
 
   namespace :api do
