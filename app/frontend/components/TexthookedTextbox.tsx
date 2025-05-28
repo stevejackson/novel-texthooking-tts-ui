@@ -55,7 +55,7 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton }
 
         const post_data = {
             text: text,
-            voice_id: 1501
+            voice_id: localStorage.getItem("texthooker.ttsVoiceId")
         };
 
         axios({
@@ -86,7 +86,7 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton }
     }
 
     const fetchTTSButton = (
-        <PlayCircleIcon className="text-blue-500 size-[48px]" onClick={handleTtsFetchClicked} />
+        <PlayCircleIcon className="text-blue-500 size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
     );
 
     const fetchClipboardButton = false && (
@@ -99,14 +99,14 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton }
     return (
         <div className="w-full
                 mx-auto rounded-xl bg-white
-                p-6 cursor-pointer
+                p-6
                 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
                 dark:-outline-offset-1 dark:outline-white/10">
             <div>
                 {fetchClipboardButton}
 
                 <div className="flex flex-row items-center align-middle justify-center" style={ { gap: "8px" } }>
-                    <div className="flex-none texthooker-line-play-button">{fetchTTSButton}</div>
+                    {ttsButton && <div className="flex-none texthooker-line-play-button">{fetchTTSButton}</div>}
 
                     <div className="flex-1 flex flex-col justify-around">
                         <p className="text-gray-500 dark:text-gray-400 flex-1">

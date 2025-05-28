@@ -50,27 +50,8 @@ const NovelApp = () => {
         setTimeout(() => setSelection(window.getSelection().toString(), 100));
     }
 
-    const initializeDefaultSettings = () => {
-        const novelReaderContentLanguage = localStorage.getItem("novelReader.contentLanguage");
-        const novelReaderTranslationLanguage = localStorage.getItem("novelReader.translationLanguage");
-        const novelReaderTTSVoiceId = localStorage.getItem("novelReader.ttsVoiceId");
-
-        if(novelReaderContentLanguage === undefined || novelReaderContentLanguage === null) {
-            localStorage.setItem("novelReader.contentLanguage", "EN");
-        }
-
-        if(novelReaderTranslationLanguage === undefined || novelReaderTranslationLanguage === null) {
-            localStorage.setItem("novelReader.translationLanguage", "ZH-HANS");
-        }
-
-        if(novelReaderTTSVoiceId === undefined || novelReaderTTSVoiceId === null) {
-            localStorage.setItem("novelReader.ttsVoiceId", "2402");
-        }
-    }
-
     useEffect(() => {
         document.addEventListener("contextmenu", updateSelection);
-        initializeDefaultSettings();
     }, []);
 
     return (

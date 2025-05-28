@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import TexthookedLine from "~/components/TexthookedLine";
+import TexthookedLine from "./TexthookedLine";
 
 const TexthookerApp = () => {
     const [texthookedLines, setTexthookedLines] = React.useState([]);
@@ -34,8 +34,7 @@ const TexthookerApp = () => {
                 if (clipboardContent !== previousContent) {
                     console.log("Clipboard content changed. New content: ", clipboardContent);
 
-                    const texthookedLine = (<TexthookedLine originalSourceText={clipboardContent} />);
-                    setTexthookedLines([texthookedLine, ...texthookedLines]);
+                    setTexthookedLines([...texthookedLines, clipboardContent]);
                 }
             }
         }
@@ -51,10 +50,17 @@ const TexthookerApp = () => {
               absolute -z--10
               pl-5 pr-5 pt-2 pb-2">
             <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mx-auto">
-                {texthookedLines}
-                <TexthookedLine originalSourceText="here is a go thing." />
-                <TexthookedLine originalSourceText="Estelle! What are you doing?!" />
-                <TexthookedLine originalSourceText="Joshua! What is happening?!" />
+                {texthookedLines.map(text => <TexthookedLine originalSourceText={text} />)}
+
+                {texthookedLines.length === 0 && (
+                    <div className="w-full
+                                    mx-auto rounded-xl bg-white
+                                    p-6
+                                    shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
+                                    dark:-outline-offset-1 dark:outline-white/10">
+                        When new text is copied to the clipboard, you should see this page update.
+                    </div>
+                )}
             </div>
         </main>
     );
