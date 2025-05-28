@@ -50,7 +50,7 @@ const TexthookerApp = () => {
               absolute -z--10
               pl-5 pr-5 pt-2 pb-2">
             <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mx-auto">
-                {texthookedLines.map(text => <TexthookedLine originalSourceText={text} />)}
+                {texthookedLines.reverse().map(text => <TexthookedLine originalSourceText={text} />)}
 
                 {texthookedLines.length === 0 && (
                     <div className="w-full
