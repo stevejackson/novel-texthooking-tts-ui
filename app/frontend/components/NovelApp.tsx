@@ -34,7 +34,6 @@ const NovelApp = () => {
                     console.log(paragraphs);
 
                     if(paragraphs !== null && paragraphs.length > 0) {
-                        console.log("Affirm");
                         setNovelParagraphs(paragraphs);
                     }
                 });

@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import TexthookedLine from "./TexthookedLine";
 
 const TexthookerApp = () => {
     const [texthookedLines, setTexthookedLines] = React.useState([]);
+    const clipboardPollTimeoutId = useRef(null);
 
     useEffect(() => {
+        clearTimeout(clipboardPollTimeoutId.current);
+
         // This won't work in firefox; it doesn't allow reading clipboard data without direct user interaction.
         const startClipboardPoll = async () => {
             let clipboardContent;
@@ -15,8 +18,11 @@ const TexthookerApp = () => {
             // window.onfocus = async function () { clipboardContent = await navigator.clipboard.readText() }
 
             while (true) {
-                await new Promise(r => setTimeout(r, 500)) // wait
-                console.info("Checking clipboard for update...");
+                let pollingInterval = 500;
+                await new Promise(r => {
+                    clipboardPollTimeoutId.current = setTimeout(r, pollingInterval);
+                });
+                console.info(`Checking clipboard for update each ${pollingInterval}ms...`);
 
                 const previousContent = clipboardContent;
                 try {
@@ -24,23 +30,36 @@ const TexthookerApp = () => {
                 } catch (e) {
                     // This function may fail if you focus another webpage
                     // just ignoring and continuing.
-                    continue
+                    continue;
                 }
 
                 if (previousContent == undefined) {
-                    continue
+                    continue;
                 }
 
                 if (clipboardContent !== previousContent) {
                     console.log("Clipboard content changed. New content: ", clipboardContent);
-
-                    setTexthookedLines([...texthookedLines, clipboardContent]);
+                    setTexthookedLines([clipboardContent, ...texthookedLines]);
                 }
             }
         }
 
         startClipboardPoll();
+
+        return () => {
+            clearTimeout(clipboardPollTimeoutId.current);
+        };
     });
+
+    const strToHashCode = (s) => {
+        for(var i = 0, h = 0; i < s.length; i++) {
+          h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+        }
+        console.log(h);
+        return h;
+    }
+
+    console.log("Rendering texthooker app with the following lines: ", texthookedLines);
 
     return (
         <main id="app-container"
@@ -50,7 +69,7 @@ const TexthookerApp = () => {
               absolute -z--10
               pl-5 pr-5 pt-2 pb-2">
             <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mx-auto">
-                {texthookedLines.reverse().map(text => <TexthookedLine originalSourceText={text} />)}
+                {texthookedLines.map(text => <TexthookedLine key={strToHashCode(text)} originalSourceText={text} />)}
 
                 {texthookedLines.length === 0 && (
                     <div className="w-full

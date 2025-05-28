@@ -78,9 +78,6 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton }
 
 
     const handleNewClipboardContentsEvent = (event) => {
-        console.log (window.isSecureContext);
-
-
         navigator.clipboard
             .readText()
             .then((clipText) => (console.log(clipText)));
