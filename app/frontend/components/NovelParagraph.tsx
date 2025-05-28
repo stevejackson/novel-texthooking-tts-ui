@@ -50,7 +50,7 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
     };
 
     const fetchTTSButton = (
-        <PlayCircleIcon className="text-blue-500 size-[24px]" onClick={handleTtsFetchClicked} />
+        <PlayCircleIcon className="text-blue-500 size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
     );
 
     const stopTTSButton = (
@@ -61,11 +61,11 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
 
     return (
         <div className="flex mb-[12px]">
-            <div className="w-[36px] pt-[2px]">
+            <div className="pt-[2px]">
                 {ttsStartStopButton}
             </div>
 
-            <div className="flex-1">
+            <div className="flex-1 pl-[10px]">
                 {sentences.map((sentence) => (
                     <div>{sentence}</div>
                 ))}
