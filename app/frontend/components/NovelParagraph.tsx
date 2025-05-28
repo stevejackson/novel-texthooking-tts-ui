@@ -29,7 +29,8 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
 
         const post_data = {
             text: sentences.join(" "),
-            voice_id: localStorage.getItem("novelReader.ttsVoiceId")
+            voice_id: localStorage.getItem("novelReader.ttsVoiceId"),
+            audio_speed: localStorage.getItem("novelReader.audioSpeed"),
         };
 
         axios({

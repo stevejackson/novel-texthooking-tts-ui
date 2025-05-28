@@ -55,7 +55,8 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton }
 
         const post_data = {
             text: text,
-            voice_id: localStorage.getItem("texthooker.ttsVoiceId")
+            voice_id: localStorage.getItem("texthooker.ttsVoiceId"),
+            audio_speed: localStorage.getItem("texthooker.audioSpeed"),
         };
 
         axios({

@@ -5,7 +5,7 @@ class TtsMakerApiWrapper
     @base_api_url = "https://api.ttsmaker.com/v2"
   end
 
-  def fetch_tts(text:, voice_id: 1501)
+  def fetch_tts(text:, voice_id: 1501, audio_speed:1.0)
     conn = Faraday.new(
       url: @base_api_url + "/create-tts-order",
       params: {}
@@ -20,7 +20,7 @@ class TtsMakerApiWrapper
         text: text,
         voice_id: voice_id,
         audio_format: "mp3",
-        audio_speed: 1,
+        audio_speed: audio_speed,
         audio_volume: 1,
         audio_pitch: 1,
         audio_high_quality: 0,

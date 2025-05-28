@@ -4,10 +4,12 @@ const SettingsApp = () => {
     const [novelReaderTtsVoiceId, setNovelReaderTtsVoiceId] = useState(localStorage.getItem("novelReader.ttsVoiceId"));
     const [novelReaderContentLanguage, setNovelReaderContentLanguage] = useState(localStorage.getItem("novelReader.contentLanguage"));
     const [novelReaderTranslationLanguage, setNovelReaderTranslationLanguage] = useState(localStorage.getItem("novelReader.translationLanguage"));
+    const [novelReaderAudioSpeed, setNovelReaderAudioSpeed] = useState(localStorage.getItem("novelReader.audioSpeed"));
 
     const [texthookerTtsVoiceId, setTexthookerTtsVoiceId] = useState(localStorage.getItem("texthooker.ttsVoiceId"));
     const [texthookerContentLanguage, setTexthookerContentLanguage] = useState(localStorage.getItem("texthooker.contentLanguage"));
     const [texthookerTranslationLanguage, setTexthookerTranslationLanguage] = useState(localStorage.getItem("texthooker.translationLanguage"));
+    const [texthookerAudioSpeed, setTexthookerAudioSpeed] = useState(localStorage.getItem("texthooker.audioSpeed"));
 
     const updateNovelReaderTTSVoiceId = (e) => {
         localStorage.setItem("novelReader.ttsVoiceId", e.target.value);
@@ -24,6 +26,11 @@ const SettingsApp = () => {
         setNovelReaderTranslationLanguage(e.target.value);
     }
 
+    const updateNovelReaderAudioSpeed = (e) => {
+        localStorage.setItem("novelReader.audioSpeed", e.target.value);
+        setNovelReaderAudioSpeed(e.target.value);
+    }
+
     const updateTexthookerTTSVoiceId = (e) => {
         localStorage.setItem("texthooker.ttsVoiceId", e.target.value);
         setTexthookerTtsVoiceId(e.target.value);
@@ -37,6 +44,11 @@ const SettingsApp = () => {
     const updateTexthookerTranslationLanguage = (e) => {
         localStorage.setItem("texthooker.translationLanguage", e.target.value);
         setTexthookerTranslationLanguage(e.target.value);
+    }
+
+    const updateTexthookerAudioSpeed = (e) => {
+        localStorage.setItem("texthooker.audioSpeed", e.target.value);
+        setTexthookerAudioSpeed(e.target.value);
     }
 
     const novelReaderSettings = (
@@ -69,6 +81,22 @@ const SettingsApp = () => {
                     <options>
                         <option value="EN">English</option>
                         <option value="ZH-HANS">Chinese (Simplified)</option>
+                    </options>
+                </select>
+            </div>
+
+            <div>
+                <label>Audio Speed:</label>
+                <select onChange={updateNovelReaderAudioSpeed} value={novelReaderAudioSpeed}>
+                    <options>
+                        <option value="0.5">0.5x</option>
+                        <option value="0.6">0.6x</option>
+                        <option value="0.7">0.7x</option>
+                        <option value="0.8">0.8x</option>
+                        <option value="0.9">0.9x</option>
+                        <option value="1.0">1x</option>
+                        <option value="1.1">1.1x</option>
+                        <option value="1.2">1.2x</option>
                     </options>
                 </select>
             </div>
@@ -105,6 +133,22 @@ const SettingsApp = () => {
                     <options>
                         <option value="EN">English</option>
                         <option value="ZH-HANS">Chinese (Simplified)</option>
+                    </options>
+                </select>
+            </div>
+
+            <div>
+                <label>Audio Speed:</label>
+                <select onChange={updateTexthookerAudioSpeed} value={texthookerAudioSpeed}>
+                    <options>
+                        <option value="0.5">0.5x</option>
+                        <option value="0.6">0.6x</option>
+                        <option value="0.7">0.7x</option>
+                        <option value="0.8">0.8x</option>
+                        <option value="0.9">0.9x</option>
+                        <option value="1.0">1x</option>
+                        <option value="1.1">1.1x</option>
+                        <option value="1.2">1.2x</option>
                     </options>
                 </select>
             </div>
