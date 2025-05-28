@@ -59,16 +59,9 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
 
     let ttsStartStopButton = fetchTTSButton;
 
-    // if(paragraphTtsAudio !== null && paragraphTtsAudio.duration > 0 && !paragraphTtsAudio.paused) {
-    //     ttsStartStopButton = fetchTTSButton;
-    // }
-    // else {
-    //     ttsStartStopButton = stopTTSButton;
-    // }
-
     return (
-        <div className="flex m-[12px]">
-            <div className="w-[48px]">
+        <div className="flex mb-[12px]">
+            <div className="w-[36px] pt-[2px]">
                 {ttsStartStopButton}
             </div>
 
