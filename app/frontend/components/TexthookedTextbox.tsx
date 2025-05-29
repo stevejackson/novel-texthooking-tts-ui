@@ -106,7 +106,7 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton }
                 <div className="flex flex-row items-center align-middle justify-center" style={ { gap: "8px" } }>
                     {ttsButton && <div className="flex-none texthooker-line-play-button">{fetchTTSButton}</div>}
 
-                    <div className="flex-1 flex flex-col justify-around">
+                    <div className="flex-1 flex flex-col justify-around whitespace-pre-wrap">
                         <p className="text-gray-500 dark:text-gray-400 flex-1">
                             {text}
                         </p>
