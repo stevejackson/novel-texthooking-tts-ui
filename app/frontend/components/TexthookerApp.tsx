@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import TexthookedLine from "./TexthookedLine";
+import {useHotkeys} from "react-hotkeys-hook";
 
 const TexthookerApp = () => {
     const [texthookedLines, setTexthookedLines] = React.useState([]);
@@ -61,6 +62,7 @@ const TexthookerApp = () => {
 
     console.log("Rendering texthooker app with the following lines: ", texthookedLines);
 
+
     return (
         <main id="app-container"
               className="w-screen bg-gray-950/[4.5%]
@@ -69,7 +71,8 @@ const TexthookerApp = () => {
               absolute -z--10
               pl-5 pr-5 pt-2 pb-2">
             <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mx-auto">
-                {texthookedLines.map(text => <TexthookedLine key={strToHashCode(text)} originalSourceText={text} />)}
+                {texthookedLines.map((text, index) =>
+                    <TexthookedLine key={strToHashCode(text)} originalSourceText={text} isFirstLine={index === 0} />)}
 
                 {texthookedLines.length === 0 && (
                     <div className="w-full
