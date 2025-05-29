@@ -5,9 +5,13 @@ import VerticalDivider from "./utilities/VerticalDivider";
 
 interface NovelSelectedTextPopupProps {
     selectedText: string;
+    contentLanguage: string;
+    translationLanguage: string;
+    ttsVoiceId: string;
+    audioSpeed: string;
 }
 
-const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selectedText }) => {
+const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed }) => {
     const [translatedText, setTranslatedText] = React.useState();
 
     const handleTtsFetchClicked = (e) => {
@@ -15,8 +19,8 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
 
         const post_data = {
             text: selectedText,
-            voice_id: localStorage.getItem("novelReader.ttsVoiceId"),
-            audio_speed: localStorage.getItem("novelReader.audioSpeed"),
+            voice_id: ttsVoiceId,
+            audio_speed: audioSpeed,
         };
 
         axios({
@@ -41,8 +45,8 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
             url: "/api/v1/fetch_translation",
             params: {
                 text: selectedText,
-                content_language: localStorage.getItem("novelReader.contentLanguage"),
-                translation_language: localStorage.getItem("novelReader.translationLanguage")
+                content_language: contentLanguage,
+                translation_language: translationLanguage,
             },
             config: { 'Content-Type': 'application/json', params: {} }})
             .then(response => {
