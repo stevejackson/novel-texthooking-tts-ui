@@ -12,7 +12,12 @@ const TexthookedLine: React.FC<TexthookedLineProps> = ({ originalSourceText, isF
     const [translatedText, setTranslatedText] = React.useState<string>();
     const [audioElement, setAudioElement] = React.useState<HTMLAudioElement | null>(null);
 
-    useEffect(() => {
+    const fetchTranslation = () => {
+        if(translatedText) {
+            // don't re-fetch translation if this component is re-rendered for some reason.
+            return;
+        }
+
         axios({
             method: "get",
             url: "/api/v1/fetch_translation",
@@ -31,6 +36,10 @@ const TexthookedLine: React.FC<TexthookedLineProps> = ({ originalSourceText, isF
                     setTranslatedText(result);
                 }
             });
+    }
+
+    useEffect(() => {
+        fetchTranslation();
     });
 
     const fetchTts = () => {
