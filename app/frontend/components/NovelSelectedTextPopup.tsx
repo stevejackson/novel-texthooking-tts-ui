@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import axios from "axios";
 import {PlayCircleIcon} from "@heroicons/react/24/outline";
 import VerticalDivider from "./utilities/VerticalDivider";
+import AddToAnkiModal from "./AddToAnkiModal";
 
 interface NovelSelectedTextPopupProps {
     selectedText: string;
@@ -100,6 +101,10 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
 
                     <div className="flex-1">
                         {translatedText}
+                    </div>
+
+                    <div>
+                        {false && <AddToAnkiModal />}
                     </div>
                 </div>
             </div>

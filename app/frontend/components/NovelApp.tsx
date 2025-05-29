@@ -17,7 +17,7 @@ const NovelApp = () => {
             console.log("New Novel text: ");
             console.log(clipboardContent)
 
-            let splitByLineBreaks  = clipboardContent.split("\n");
+            let splitByLineBreaks = clipboardContent.split("\n");
             splitByLineBreaks = splitByLineBreaks.filter((line) => line.length > 0);
             console.log(splitByLineBreaks);
 
