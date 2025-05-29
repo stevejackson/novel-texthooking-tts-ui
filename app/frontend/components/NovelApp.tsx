@@ -58,7 +58,8 @@ const NovelApp = () => {
                       bg-gray-950/[4.5%]
                       bg-[radial-gradient(circle,#73737350_1px,transparent_1px)]
                       bg-[size:10px_10px]
-                      absolute -z--10">
+                      absolute -z--10
+                      text-gray-500">
             {selection && <NovelSelectedTextPopup selectedText={selection}
                                                   contentLanguage={localStorage.getItem("novelReader.contentLanguage")}
                                                   translationLanguage={localStorage.getItem("novelReader.translationLanguage")}

@@ -1,10 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import TexthookedLine from "./TexthookedLine";
 import {useHotkeys} from "react-hotkeys-hook";
+import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
 
 const TexthookerApp = () => {
     const [texthookedLines, setTexthookedLines] = React.useState([]);
     const clipboardPollTimeoutId = useRef(null);
+    const [selection, setSelection] = React.useState("");
 
     useEffect(() => {
         clearTimeout(clipboardPollTimeoutId.current);
@@ -52,6 +54,10 @@ const TexthookerApp = () => {
         };
     });
 
+    const updateSelection = (e) => {
+        setTimeout(() => setSelection(window.getSelection().toString(), 100));
+    }
+
     const strToHashCode = (s) => {
         for(var i = 0, h = 0; i < s.length; i++) {
           h = Math.imul(31, h) + s.charCodeAt(i) | 0;
@@ -68,8 +74,15 @@ const TexthookerApp = () => {
               bg-[radial-gradient(circle,#73737350_1px,transparent_1px)]
               bg-[size:10px_10px]
               absolute -z--10
-              pl-5 pr-5 pt-2 pb-2">
-            <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mx-auto">
+              text-gray-500">
+            {selection && <NovelSelectedTextPopup selectedText={selection}
+                                                  contentLanguage={localStorage.getItem("texthooker.contentLanguage")}
+                                                  translationLanguage={localStorage.getItem("texthooker.translationLanguage")}
+                                                  ttsVoiceId={localStorage.getItem("texthooker.ttsVoiceId")}
+                                                  audioSpeed={localStorage.getItem("texthooker.audioSpeed")}
+            />}
+            <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mx-auto pl-5 pr-5 pt-2 pb-2"
+                 onClick={updateSelection}>
                 {texthookedLines.map((text, index) =>
                     <TexthookedLine key={strToHashCode(text)} originalSourceText={text} isFirstLine={index === 0} />)}
 
