@@ -13,9 +13,15 @@ interface NovelSelectedTextPopupProps {
 
 const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed }) => {
     const [translatedText, setTranslatedText] = React.useState();
+    const [ttsFileUrl, setTtsFileUrl] = React.useState(null);
+    const [audioElement, setAudioElement] = React.useState<HTMLAudioElement | null>(null);
 
-    const handleTtsFetchClicked = (e) => {
-        e.preventDefault();
+    const fetchTts = () => {
+        if(ttsFileUrl) {
+            audioElement.currentTime = 0;
+            audioElement.play();
+            return;
+        }
 
         const post_data = {
             text: selectedText,
@@ -33,10 +39,17 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
                 console.log("TTS File fetched, URL result: " + url);
 
                 if(url) {
+                    setTtsFileUrl(url);
+
                     let audio = new Audio(url);
+                    setAudioElement(audio);
                     audio.play();
                 }
             });
+    }
+    const handleTtsFetchClicked = (e) => {
+        e.preventDefault();
+        fetchTts();
     };
 
     useEffect(() => {
