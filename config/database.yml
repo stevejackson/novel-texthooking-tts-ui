@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: placeholder_name_development
+  database: novel_texthooking_tts_ui_development
 
 test:
   <<: *default
-  database: placeholder_name_test
+  database: novel_texthooking_tts_ui_test
 
 production:
   <<: *default
-  database: placeholder_name_production
-  username: placeholder_name
+  database: novel_texthooking_tts_ui_production
+  username: novel_texthooking_tts_ui_user
   password: <%= ENV["PLACEHOLDER_NAME_DATABASE_PASSWORD"] %>
