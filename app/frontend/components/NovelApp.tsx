@@ -3,6 +3,7 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import axios from "axios";
 import NovelParagraph from "./NovelParagraph";
 import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
+import RoundedContentBox from "./utilities/RoundedContentBox";
 
 const NovelApp = () => {
     const [novelParagraphs, setNovelParagraphs] = React.useState([]);
@@ -67,40 +68,25 @@ const NovelApp = () => {
                                                   audioSpeed={localStorage.getItem("novelReader.audioSpeed")}
             />}
 
-            <div className="">
-                <main className="pl-5 pr-5 pt-2 pb-2">
-                    <div className="w-full
-                        mx-auto rounded-xl bg-white
-                        p-6
-                        shadow-lg outline outline-black/5">
-                        {(novelParagraphs === null || novelParagraphs.length === 0) && (
-                            <div>
-                                No novel has been pasted in yet.
-                                &nbsp;<a href="#" onClick={fetchFromClipboard}>Fetch from clipboard now?</a>
-                            </div>
-                        )}
-
-                        <div className="whitespace-pre-wrap"
-                             onClick={updateSelection}>
-                            {novelParagraphs.map((paragraph) =>
-                                <NovelParagraph sentences={paragraph}/>
-                            )}
-                        </div>
+            <RoundedContentBox>
+                {(novelParagraphs === null || novelParagraphs.length === 0) && (
+                    <div>
+                        No novel has been pasted in yet.
+                        &nbsp;<a href="#" onClick={fetchFromClipboard}>Fetch from clipboard now?</a>
                     </div>
-                </main>
-            </div>
+                )}
 
-            <div className="flex-1">
-                <div className="pl-5 pr-5 pt-2 pb-2">
-                    <div className="w-full
-                        mx-auto rounded-xl bg-white
-                        p-6
-                        shadow-lg outline outline-black/5">
-                        <a href="/dashboard">Back to Dashboard</a>
-                    </div>
+                <div className="whitespace-pre-wrap"
+                     onClick={updateSelection}>
+                    {novelParagraphs.map((paragraph) =>
+                        <NovelParagraph sentences={paragraph}/>
+                    )}
                 </div>
-            </div>
+            </RoundedContentBox>
 
+            <RoundedContentBox>
+                <a href="/dashboard">Back to Dashboard</a>
+            </RoundedContentBox>
         </div>
     );
 };
