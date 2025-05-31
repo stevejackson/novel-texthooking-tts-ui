@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PlaceholderNameSchema < GraphQL::Schema
+class MainSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
