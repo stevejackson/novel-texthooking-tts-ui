@@ -67,14 +67,13 @@ const NovelApp = () => {
                                                   audioSpeed={localStorage.getItem("novelReader.audioSpeed")}
             />}
 
-            <div className="flex-grow">
-                <main id="app-container"
+            <div className="">
+                <main id=""
                       className="pl-5 pr-5 pt-2 pb-2">
                     <div className="w-full
                         mx-auto rounded-xl bg-white
                         p-6
-                        shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
-                        dark:-outline-offset-1 dark:outline-white/10">
+                        shadow-lg outline outline-black/5">
 
                         {(novelParagraphs === null || novelParagraphs.length === 0) && (
                             <div>
@@ -92,6 +91,20 @@ const NovelApp = () => {
                     </div>
                 </main>
             </div>
+
+
+            <div className="flex-1">
+                <div className="pl-5 pr-5 pt-2 pb-2">
+                    <div className="w-full
+                        mx-auto rounded-xl bg-white
+                        p-6
+                        shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
+                        dark:-outline-offset-1 dark:outline-white/10">
+                        <a href="/dashboard" className="text-blue-500">Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 };
