@@ -32,3 +32,6 @@ end
 group :test do
   gem 'shoulda-matchers', '~> 6.4.0'
 end
+
+gem "graphql", "~> 2.5"
+gem "graphiql-rails", group: :development

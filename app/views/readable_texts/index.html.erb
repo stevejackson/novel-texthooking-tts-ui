@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Readable texts" %>
+
+<h1>Readable texts</h1>
+
+<div id="readable_texts">
+  <% @readable_texts.each do |readable_text| %>
+    <p><%= readable_text.name %></p>
+    <p>
+      <%= link_to "Show this readable text", readable_text %>
+    </p>
+  <% end %>
+</p>
+
+<%= link_to "New readable text", new_readable_text_path %>

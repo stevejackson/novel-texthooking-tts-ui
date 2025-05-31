@@ -1,0 +1,12 @@
+<% content_for :title, "Editing readable text" %>
+
+<h1>Editing readable text</h1>
+
+<%= render "form", readable_text: @readable_text %>
+
+<br>
+
+<div>
+  <%= link_to "Show this readable text", @readable_text %> |
+  <%= link_to "Back to readable texts", readable_texts_path %>
+</div>

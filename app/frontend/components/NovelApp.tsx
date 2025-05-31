@@ -1,51 +1,33 @@
 import React, {useEffect, useState} from 'react';
-import { useHotkeys } from 'react-hotkeys-hook'
-import axios from "axios";
 import NovelParagraph from "./NovelParagraph";
 import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
 import RoundedContentBox from "./utilities/RoundedContentBox";
-import VerticalDivider from "./utilities/VerticalDivider";
+import { useQuery, gql } from "@apollo/client";
 
 const NovelApp = () => {
     const [novelParagraphs, setNovelParagraphs] = React.useState([]);
     const [selection, setSelection] = React.useState("");
 
-    const fetchFromClipboard = async () => {
-        const clipboardContent = await navigator.clipboard.readText();
-        console.log("Clipboard content: ", clipboardContent);
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
 
-        if(confirm("Replace novel text with clipboard contents?")) {
-            console.log("Confirmed. Replacing novel text with clipboard contents.");
-            console.log("New Novel text: ");
-            console.log(clipboardContent)
-
-            let splitByLineBreaks = clipboardContent.split("\n");
-            splitByLineBreaks = splitByLineBreaks.filter((line) => line.length > 0);
-            console.log(splitByLineBreaks);
-
-            axios({
-                method: "post",
-                url: "/api/v1/segment_paragraphs",
-                data: {
-                    paragraphs: splitByLineBreaks
-                },
-                config: { 'Content-Type': 'application/json', params: {} }})
-                .then(response => {
-                    const paragraphs = response.data.paragraphs;
-                    console.log("API responded with segmented paragraphs: ");
-                    console.log(paragraphs);
-
-                    if(paragraphs !== null && paragraphs.length > 0) {
-                        setNovelParagraphs(paragraphs);
+    const GET_READABLE_TEXT = gql`
+                  query readableText($id: ID!) {
+                    fetchReadableText(id: $id) {
+                      id
+                      name
+                      language
+                      content
+                      segmentedParagraphs
                     }
-                });
-        }
-        else {
-            console.log("User decided not to replace novel text with clipboard contents.");
-        }
-    }
+                  }`;
 
-    useHotkeys('meta+v, ctrl+v', fetchFromClipboard);
+    const { error, loading, data } = useQuery(GET_READABLE_TEXT, {
+       variables: { id: params.id }
+    });
+
+    console.log({ error, loading, data });
 
     const updateSelection = (e) => {
         setTimeout(() => setSelection(window.getSelection().toString(), 100));
@@ -54,6 +36,18 @@ const NovelApp = () => {
     useEffect(() => {
         document.addEventListener("contextmenu", updateSelection);
     }, []);
+
+    if(loading) {
+        return <div>Loading text...</div>
+    }
+
+    if(!params.id) {
+        return (
+            <div>
+                Please visit <a href="/readable_texts">here</a> to select a text to read.
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col min-h-screen w-screen
@@ -70,19 +64,9 @@ const NovelApp = () => {
             />}
 
             <RoundedContentBox>
-                {(novelParagraphs === null || novelParagraphs.length === 0) && (
-                    <div>
-                        No text has been chosen to read yet.
-                        <ul className="list-disc pl-[1.5em]">
-                            <li><a href="#" onClick={fetchFromClipboard}>Fetch text from clipboard</a></li>
-                            <li><a href="/texts">Create or choose a text to read</a></li>
-                        </ul>
-                    </div>
-                )}
-
                 <div className="whitespace-pre-wrap"
                      onClick={updateSelection}>
-                    {novelParagraphs.map((paragraph) =>
+                    {data.fetchReadableText.segmentedParagraphs.map((paragraph) =>
                         <NovelParagraph sentences={paragraph}/>
                     )}
                 </div>
@@ -90,8 +74,8 @@ const NovelApp = () => {
 
             <RoundedContentBox>
                 <a href="/dashboard">Back to Dashboard</a>,
-                &nbsp;<a href="#" onClick={fetchFromClipboard}>Fetch text from clipboard</a>,
-                &nbsp;<a href="/texts">Create or choose a text to read</a>
+                &nbsp;<a href={`/readable_texts/${params.id}/edit`}>Edit this text</a>,
+                &nbsp;<a href="/readable_texts">Create or choose a text to read</a>
             </RoundedContentBox>
         </div>
     );

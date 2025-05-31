@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @readable_text %>
+
+<div>
+  <%= link_to "Edit this readable text", edit_readable_text_path(@readable_text) %> |
+  <%= link_to "Back to readable texts", readable_texts_path %>
+  <%= link_to "Read this text now", novels_path(id: @readable_text.id) %>
+
+  <%= button_to "Destroy this readable text", @readable_text, method: :delete %>
+</div>
