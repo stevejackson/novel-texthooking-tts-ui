@@ -75,7 +75,7 @@ const NovelApp = () => {
             <RoundedContentBox>
                 <a href="/dashboard">Back to Dashboard</a>,
                 &nbsp;<a href={`/readable_texts/${params.id}/edit`}>Edit this text</a>,
-                &nbsp;<a href="/readable_texts">Create or choose a text to read</a>
+                &nbsp;<a href="/readable_texts">View all texts</a>
             </RoundedContentBox>
         </div>
     );

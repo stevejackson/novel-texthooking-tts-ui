@@ -4,13 +4,41 @@
 
 <h1>Readable texts</h1>
 
-<div id="readable_texts">
-  <% @readable_texts.each do |readable_text| %>
-    <p><%= readable_text.name %></p>
-    <p>
-      <%= link_to "Show this readable text", readable_text %>
-    </p>
-  <% end %>
-</p>
+<div class="mt-[20px]">
+  <%= link_to "New readable text", new_readable_text_path %>
+</div>
 
-<%= link_to "New readable text", new_readable_text_path %>
+<div class="relative overflow-x-auto">
+  <table class="max-w-[1000px] text-sm text-left rtl:text-right text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Name
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Language
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Word Count
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @readable_texts.each do |readable_text| %>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= readable_text.name %>
+          </th>
+
+          <td class="px-6 py-4"><%= readable_text.language %></td>
+          <td class="px-6 py-4"><%= readable_text.word_count %></td>
+          <td class="px-6 py-4"><%= link_to "Read now", novels_path(id: readable_text.id), style: "color: green;"%></td>
+          <td class="px-6 py-4"><%= link_to "Show details", readable_text_path(readable_text) %></td>
+          <td class="px-6 py-4"><%= link_to "Edit", edit_readable_text_path(readable_text) %></td>
+          <td class="px-6 py-4"><%= button_to "Delete", readable_text, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -13,4 +13,8 @@ class ReadableText < ApplicationRecord
 
     segmented_paragraphs
   end
+
+  def word_count
+    content.split.size
+  end
 end

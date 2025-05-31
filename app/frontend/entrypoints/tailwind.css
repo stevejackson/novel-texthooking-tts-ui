@@ -3,7 +3,11 @@
 @source '../../../.flowbite-react/class-list.json';
 
 @source '../../../app/views/**/*.{html,html.erb,erb}';
+@source '../../app/views/**/*.{html,html.erb,erb}';
 @source '../../../app/helpers/**/*.rb';
 @source '../../../app/frontend/**/*.{vue,js,ts,jsx,tsx}';
+
+@source '../../../app/**/*.{html,html.erb,erb}'
+@source '../../app/**/*.{html,html.erb,erb}'
 
 @plugin '@tailwindcss/forms';
