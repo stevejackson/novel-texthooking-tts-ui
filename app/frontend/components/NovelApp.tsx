@@ -4,6 +4,7 @@ import axios from "axios";
 import NovelParagraph from "./NovelParagraph";
 import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
 import RoundedContentBox from "./utilities/RoundedContentBox";
+import VerticalDivider from "./utilities/VerticalDivider";
 
 const NovelApp = () => {
     const [novelParagraphs, setNovelParagraphs] = React.useState([]);
@@ -71,8 +72,11 @@ const NovelApp = () => {
             <RoundedContentBox>
                 {(novelParagraphs === null || novelParagraphs.length === 0) && (
                     <div>
-                        No novel has been pasted in yet.
-                        &nbsp;<a href="#" onClick={fetchFromClipboard}>Fetch from clipboard now?</a>
+                        No text has been chosen to read yet.
+                        <ul className="list-disc pl-[1.5em]">
+                            <li><a href="#" onClick={fetchFromClipboard}>Fetch text from clipboard</a></li>
+                            <li><a href="/texts">Create or choose a text to read</a></li>
+                        </ul>
                     </div>
                 )}
 
@@ -85,7 +89,9 @@ const NovelApp = () => {
             </RoundedContentBox>
 
             <RoundedContentBox>
-                <a href="/dashboard">Back to Dashboard</a>
+                <a href="/dashboard">Back to Dashboard</a>,
+                &nbsp;<a href="#" onClick={fetchFromClipboard}>Fetch text from clipboard</a>,
+                &nbsp;<a href="/texts">Create or choose a text to read</a>
             </RoundedContentBox>
         </div>
     );
