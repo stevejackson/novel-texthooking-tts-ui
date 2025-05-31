@@ -1,7 +1,16 @@
 @import './tailwind.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html, body, #root, #app-container {
     min-height: 100vh;
     min-width: 100vw;
     max-width: 100vw;
+}
+
+@layer base {
+    a {
+        @apply text-blue-500;
+    }
 }

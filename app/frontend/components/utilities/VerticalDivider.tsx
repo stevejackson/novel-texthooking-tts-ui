@@ -8,7 +8,7 @@ const VerticalDivider: React.FC = () => {
                             w-[2px]
                             mr-[15px]
                             ml-[15px]
-                            bg-neutral-300 dark:bg-white/10" />
+                            bg-neutral-300" />
         </div>
     );
 };

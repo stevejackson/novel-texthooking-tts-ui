@@ -85,9 +85,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
                             p-6
                             mx-auto rounded-xl bg-white
                             cursor-pointer
-                            shadow-xl outline outline-black/5 dark:bg-slate-800 dark:shadow-none
-                            drop-shadow-xl/30
-                            dark:-outline-offset-1 dark:outline-white/10">
+                            shadow-xl outline outline-black/5 drop-shadow-xl/30">
                 <div className="flex">
                     <div className="w-[48px]">
                         {fetchTTSButton}

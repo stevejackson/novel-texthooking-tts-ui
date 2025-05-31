@@ -167,9 +167,8 @@ const SettingsApp = () => {
                     <div className="w-full
                         mx-auto rounded-xl bg-white
                         p-6 cursor-pointer
-                        shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
-                        dark:-outline-offset-1 dark:outline-white/10">
-                        <a href="/" className="text-blue-500">Back to Dashboard</a>
+                        shadow-lg outline outline-black/5">
+                        <a href="/">Back to Dashboard</a>
 
                         {novelReaderSettings}
                         {texthookerSettings}

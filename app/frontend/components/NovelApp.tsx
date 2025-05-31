@@ -68,17 +68,15 @@ const NovelApp = () => {
             />}
 
             <div className="">
-                <main id=""
-                      className="pl-5 pr-5 pt-2 pb-2">
+                <main className="pl-5 pr-5 pt-2 pb-2">
                     <div className="w-full
                         mx-auto rounded-xl bg-white
                         p-6
                         shadow-lg outline outline-black/5">
-
                         {(novelParagraphs === null || novelParagraphs.length === 0) && (
                             <div>
                                 No novel has been pasted in yet.
-                                &nbsp;<a href="#" className="text-blue-500" onClick={fetchFromClipboard}>Fetch from clipboard now?</a>
+                                &nbsp;<a href="#" onClick={fetchFromClipboard}>Fetch from clipboard now?</a>
                             </div>
                         )}
 
@@ -92,15 +90,13 @@ const NovelApp = () => {
                 </main>
             </div>
 
-
             <div className="flex-1">
                 <div className="pl-5 pr-5 pt-2 pb-2">
                     <div className="w-full
                         mx-auto rounded-xl bg-white
                         p-6
-                        shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
-                        dark:-outline-offset-1 dark:outline-white/10">
-                        <a href="/dashboard" className="text-blue-500">Back to Dashboard</a>
+                        shadow-lg outline outline-black/5">
+                        <a href="/dashboard">Back to Dashboard</a>
                     </div>
                 </div>
             </div>

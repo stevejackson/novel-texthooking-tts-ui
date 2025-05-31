@@ -16,14 +16,13 @@ const TexthookedTextbox: React.FC<TexthookedTextboxProps> = ({ text, ttsButton, 
         <div className="w-full
                 mx-auto rounded-xl bg-white
                 p-6
-                shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
-                dark:-outline-offset-1 dark:outline-white/10">
+                shadow-lg outline outline-black/5">
             <div>
                 <div className="flex flex-row items-center align-middle justify-center" style={ { gap: "8px" } }>
                     {ttsButton && <div className="flex-none texthooker-line-play-button">{fetchTTSButton}</div>}
 
                     <div className="flex-1 flex flex-col justify-around whitespace-pre-wrap">
-                        <p className="dark:text-gray-400 flex-1">
+                        <p className="flex-1">
                             {text}
                         </p>
                     </div>

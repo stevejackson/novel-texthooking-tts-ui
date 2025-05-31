@@ -90,8 +90,7 @@ const TexthookerApp = () => {
                     <div className="w-full
                                     mx-auto rounded-xl bg-white
                                     p-6
-                                    shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none
-                                    dark:-outline-offset-1 dark:outline-white/10">
+                                    shadow-lg outline outline-black/5">
                         When new text is copied to the clipboard, you should see this page update.
                     </div>
                 )}
