@@ -3,9 +3,11 @@
 <%= render @readable_text %>
 
 <div>
-  <%= link_to "Edit this readable text", edit_readable_text_path(@readable_text) %> |
-  <%= link_to "Back to readable texts", readable_texts_path %>
-  <%= link_to "Read this text now", novels_path(id: @readable_text.id) %>
+  <%= link_to "Edit", edit_readable_text_path(@readable_text) %> |
+  <%= link_to "View all", readable_texts_path %> |
+  <%= link_to "Read now", novels_path(id: @readable_text.id), class: "text-green-500" %>
 
-  <%= button_to "Destroy this readable text", @readable_text, method: :delete %>
+  <div class="mt-[25px]">
+    <%= button_to "Delete", @readable_text, method: :delete, class: "bg-white text-gray-500 border border-gray-200" %>
+  </div>
 </div>

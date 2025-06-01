@@ -1,17 +1,16 @@
-<div id="<%= dom_id readable_text %>">
-  <p>
-    <strong>Name:</strong>
+<div id="<%= dom_id readable_text %>" class="flex flex-col gap-[15px] m-[20px]">
+  <div>
+    <h3>Name:</h3>
     <%= readable_text.name %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Language:</strong>
+  <div>
+    <h3>Language:</h3>
     <%= readable_text.language %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Content:</strong>
-    <%= readable_text.content %>
-  </p>
-
+  <div>
+    <h3>Content:</h3>
+    <p class="whitespace-pre-wrap"><%= readable_text.content %></p>
+  </div>
 </div>

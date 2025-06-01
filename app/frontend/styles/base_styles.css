@@ -23,7 +23,7 @@ html, body, #root, #app-container {
         @apply text-xl;
     }
 
-    input[type=submit] {
+    input[type=submit], button {
         @apply text-white;
         @apply bg-blue-700;
         @apply hover:bg-blue-700;
