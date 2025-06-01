@@ -1,0 +1,40 @@
+/*
+html, body, #root, #app-container {
+    min-height: 100vh;
+    min-width: 100vw;
+    max-width: 100vw;
+}
+ */
+
+@layer base {
+    a {
+        @apply text-blue-500;
+    }
+
+    h1 {
+        @apply text-3xl;
+    }
+
+    h2 {
+        @apply text-2xl;
+    }
+
+    h3 {
+        @apply text-xl;
+    }
+
+    input[type=submit] {
+        @apply text-white;
+        @apply bg-blue-700;
+        @apply hover:bg-blue-700;
+        @apply focus:ring-4;
+        @apply focus:ring-blue-300;
+        @apply font-medium;
+        @apply rounded-lg;
+        @apply text-sm;
+        @apply px-5;
+        @apply py-2.5;
+        @apply me-2;
+        @apply mb-2;
+    }
+}
