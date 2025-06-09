@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import TexthookedLine from "./TexthookedLine";
-import {useHotkeys} from "react-hotkeys-hook";
 import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
 
 const TexthookerApp = () => {

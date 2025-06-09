@@ -14,8 +14,8 @@ interface NovelSelectedTextPopupProps {
 
 const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed }) => {
     const [translatedText, setTranslatedText] = React.useState();
-    const [ttsFileUrl, setTtsFileUrl] = React.useState(null);
-    const [audioElement, setAudioElement] = React.useState<HTMLAudioElement | null>(null);
+    const [ttsFileUrl, setTtsFileUrl] = React.useState();
+    const [audioElement, setAudioElement] = React.useState<HTMLAudioElement | null>();
 
     const fetchTts = () => {
         if(ttsFileUrl) {
@@ -102,7 +102,11 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
                     </div>
 
                     <div>
-                        {false && <AddToAnkiModal />}
+                        <AddToAnkiModal initialSentence={selectedText}
+                                        initialTranslation={translatedText}
+                                        initialAudioUrl={ttsFileUrl}
+                                        ttsVoiceId={ttsVoiceId}
+                        />
                     </div>
                 </div>
             </div>

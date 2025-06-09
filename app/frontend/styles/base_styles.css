@@ -26,6 +26,7 @@ html, body, #root, #app-container {
     input[type=submit], button {
         @apply text-white;
         @apply bg-blue-700;
+        @apply cursor-pointer;
         @apply hover:bg-blue-700;
         @apply focus:ring-4;
         @apply focus:ring-blue-300;
