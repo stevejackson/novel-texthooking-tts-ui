@@ -105,10 +105,10 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
     let modalBody = null;
 
     if(submissionResult === 'success') {
-        modalBody = <div>Successfully added card to Anki.</div>;
+        modalBody = <div><span className="text-green-500">Successfully added card to Anki.</span></div>;
     }
     else if(submissionResult === 'error') {
-        modalBody = <div>Failed to add card to Anki. Check browser console for more details. Error message: {submissionResultErrorMessage}</div>;
+        modalBody = <div><span className="text-red-500">Failed to add card to Anki</span>. Check browser console for more details. Error message: {submissionResultErrorMessage}</div>;
     }
     else {
         modalBody = (
