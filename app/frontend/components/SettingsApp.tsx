@@ -11,6 +11,9 @@ const SettingsApp = () => {
     const [texthookerTranslationLanguage, setTexthookerTranslationLanguage] = useState(localStorage.getItem("texthooker.translationLanguage"));
     const [texthookerAudioSpeed, setTexthookerAudioSpeed] = useState(localStorage.getItem("texthooker.audioSpeed"));
 
+    const [ankiDeckName, setAnkiDeckName] = useState(localStorage.getItem("anki.deckName"));
+    if(!ankiDeckName) { setAnkiDeckName("NT_TTS"); }
+
     const updateNovelReaderTTSVoiceId = (e) => {
         localStorage.setItem("novelReader.ttsVoiceId", e.target.value);
         setNovelReaderTtsVoiceId(e.target.value);
@@ -49,6 +52,11 @@ const SettingsApp = () => {
     const updateTexthookerAudioSpeed = (e) => {
         localStorage.setItem("texthooker.audioSpeed", e.target.value);
         setTexthookerAudioSpeed(e.target.value);
+    }
+
+    const updateAnkiDeckName = (e) => {
+        localStorage.setItem("anki.deckName", e.target.value);
+        setAnkiDeckName(e.target.value);
     }
 
     const novelReaderSettings = (
@@ -155,6 +163,22 @@ const SettingsApp = () => {
         </section>
     );
 
+    const ankiSettings = (
+        <section className="mt-[50px]">
+            <h2>Anki</h2>
+
+            <div>
+                <label>Anki Deck Name:</label>
+                <input type="text"
+                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                       placeholder="NT_TTS"
+                       required
+                       onChange={updateAnkiDeckName}
+                       value={ankiDeckName} />
+
+            </div>
+        </section>
+    );
     return (
         <div className="flex flex-col min-h-screen w-screen
                       bg-gray-950/[4.5%]
@@ -170,8 +194,11 @@ const SettingsApp = () => {
                         shadow-lg outline outline-black/5">
                         <a href="/">Back to Dashboard</a>
 
+                        <form>
                         {novelReaderSettings}
                         {texthookerSettings}
+                        {ankiSettings}
+                        </form>
 
                     </div>
                 </main>

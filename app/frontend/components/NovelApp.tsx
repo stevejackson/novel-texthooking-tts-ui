@@ -5,7 +5,6 @@ import RoundedContentBox from "./utilities/RoundedContentBox";
 import { useQuery, gql } from "@apollo/client";
 
 const NovelApp = () => {
-    const [novelParagraphs, setNovelParagraphs] = React.useState([]);
     const [selection, setSelection] = React.useState("");
 
     const params = new Proxy(new URLSearchParams(window.location.search), {

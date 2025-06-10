@@ -17,6 +17,8 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
     const [submissionResult, setSubmissionResult] = useState(null);
     const [submissionResultErrorMessage, setSubmissionResultErrorMessage] = useState(null);
 
+    document.getElementById("anki-deck-name").dataset.name = localStorage.getItem("anki.deckName");
+
     const openModal = () => {
         setSentence(initialSentence);
         setTranslation(initialTranslation);

@@ -50,7 +50,7 @@ const onCreateAnkiCardSubmit = async () => {
 
     const addNoteParams = {
         "note": {
-            "deckName": "MyTestDeck_Mk1",
+            "deckName": document.getElementById("anki-deck-name").dataset.name,
             "modelName": "NT_TTS_UI_V1",
             "fields": {
                 "sentence": sentence,
