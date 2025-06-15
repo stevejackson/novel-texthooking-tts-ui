@@ -11,3 +11,11 @@
 @source '../../app/**/*.{html,html.erb,erb}'
 
 @plugin '@tailwindcss/forms';
+
+@theme {
+    --color-scheme1: #275362;
+    --color-scheme2: #407a61;
+    --color-scheme3: #abbd8c;
+    --color-scheme4: #ece2dd;
+    --color-scheme5: #f8f1f4;
+}
