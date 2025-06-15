@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
   resources :novels, only: [:index, :show]
-  resources :readable_texts
+  resources :readable_texts, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :settings, only: [:index]
   resources :texthooker, only: [:index]
 

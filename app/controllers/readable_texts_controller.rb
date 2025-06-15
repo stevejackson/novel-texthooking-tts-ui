@@ -1,13 +1,9 @@
 class ReadableTextsController < ApplicationController
-  before_action :set_readable_text, only: %i[ show edit update destroy ]
+  before_action :set_readable_text, only: %i[ edit update destroy ]
 
   # GET /readable_texts
   def index
     @readable_texts = ReadableText.all
-  end
-
-  # GET /readable_texts/1
-  def show
   end
 
   # GET /readable_texts/new
