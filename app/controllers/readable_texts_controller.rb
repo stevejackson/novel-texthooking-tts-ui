@@ -3,7 +3,7 @@ class ReadableTextsController < ApplicationController
 
   # GET /readable_texts
   def index
-    @readable_texts = ReadableText.all
+    @readable_texts = ReadableText.order(created_at: :desc)
   end
 
   # GET /readable_texts/new
@@ -20,7 +20,7 @@ class ReadableTextsController < ApplicationController
     @readable_text = ReadableText.new(readable_text_params)
 
     if @readable_text.save
-      redirect_to @readable_text, notice: "Readable text was successfully created."
+      redirect_to readable_texts_path, notice: "Readable text was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
