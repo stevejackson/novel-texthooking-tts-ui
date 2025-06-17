@@ -49,12 +49,7 @@ const NovelApp = () => {
     }
 
     return (
-        <div className="flex flex-col min-h-screen w-screen
-                      bg-gray-950/[4.5%]
-                      bg-[radial-gradient(circle,#73737350_1px,transparent_1px)]
-                      bg-[size:10px_10px]
-                      absolute -z--10
-                      text-gray-800">
+        <>
             {selection && <NovelSelectedTextPopup selectedText={selection}
                                                   contentLanguage={localStorage.getItem("novelReader.contentLanguage")}
                                                   translationLanguage={localStorage.getItem("novelReader.translationLanguage")}
@@ -76,7 +71,7 @@ const NovelApp = () => {
                 &nbsp;<a href={`/readable_texts/${params.id}/edit`}>Edit this text</a>,
                 &nbsp;<a href="/readable_texts">View all texts</a>
             </RoundedContentBox>
-        </div>
+        </>
     );
 };
 
