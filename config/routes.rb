@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   post "/graphql", to: "graphql#execute"
-  root to: "dashboard#index"
+  root to: "readable_texts#index"
 
   resources :dashboard, only: [:index]
   resources :novels, only: [:index, :show]
