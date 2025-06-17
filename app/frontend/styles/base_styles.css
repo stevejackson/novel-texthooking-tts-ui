@@ -6,6 +6,19 @@ html, body, #root, #app-container {
 }
  */
 
+.dotted-background-primary {
+    @apply flex;
+    @apply flex-col;
+    @apply min-h-screen;
+    @apply w-screen;
+    @apply bg-gray-950/[4.5%];
+    @apply bg-[radial-gradient(circle,#73737350_1px,transparent_1px)];
+    @apply bg-[size:10px_10px];
+    @apply absolute;
+    @apply -z-[10];
+    @apply text-gray-800;
+}
+
 @layer base {
     a {
         color: var(--color-scheme2);
