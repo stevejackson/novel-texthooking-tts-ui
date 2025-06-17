@@ -68,12 +68,7 @@ const TexthookerApp = () => {
 
 
     return (
-        <main id="app-container"
-              className="w-screen bg-gray-950/[4.5%] min-h-screen
-              bg-[radial-gradient(circle,#73737350_1px,transparent_1px)]
-              bg-[size:10px_10px]
-              absolute -z--10
-              text-gray-800">
+        <>
             {selection && <NovelSelectedTextPopup selectedText={selection}
                                                   contentLanguage={localStorage.getItem("texthooker.contentLanguage")}
                                                   translationLanguage={localStorage.getItem("texthooker.translationLanguage")}
@@ -94,7 +89,7 @@ const TexthookerApp = () => {
                     </div>
                 )}
             </div>
-        </main>
+        </>
     );
 };
 

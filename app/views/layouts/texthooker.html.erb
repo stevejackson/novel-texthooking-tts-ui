@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Novel & Texthooking UI</title>
+  <title>Rondo Reader</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
@@ -11,6 +11,10 @@
   <%= vite_stylesheet_tag 'application' %>
 </head>
 <body>
-<%= yield %>
+  <div class="dotted-background-primary">
+    <%= render 'navbar' %>
+
+    <%= yield %>
+  </div>
 </body>
 </html>
