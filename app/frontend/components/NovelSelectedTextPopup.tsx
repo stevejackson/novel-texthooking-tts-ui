@@ -16,9 +16,11 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
     const [translatedText, setTranslatedText] = React.useState();
     const [ttsFileUrl, setTtsFileUrl] = React.useState();
     const [audioElement, setAudioElement] = React.useState<HTMLAudioElement | null>();
+    const [previouslyFetchedAudioText, setPreviouslyFetchedAudioText] = React.useState();
 
     const fetchTts = () => {
-        if(ttsFileUrl) {
+        if(previouslyFetchedAudioText === selectedText) {
+            console.log("Using existing TTS audio instead of fetching new TTS");
             audioElement.currentTime = 0;
             audioElement.play();
             return;
@@ -41,6 +43,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
 
                 if(url) {
                     setTtsFileUrl(url);
+                    setPreviouslyFetchedAudioText(selectedText);
 
                     let audio = new Audio(url);
                     setAudioElement(audio);
