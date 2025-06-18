@@ -82,7 +82,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
     );
 
     return (
-        <header className="sticky z-50 top-0 pl-5 pr-5 pt-2 pb-2 overflow-hidden">
+        <header className="sticky z-50 top-0 pl-5 pr-5 pt-2 pb-2 overflow-hidden max-w-6xl mx-auto px-4">
             <div className="w-full
                             max-h-[300px]
                             p-6
