@@ -33,7 +33,7 @@
 
           <td class="px-6 py-4"><%= readable_text.language %></td>
           <td class="px-6 py-4"><%= readable_text.word_count %></td>
-          <td class="px-6 py-4"><%= link_to "Read now", novels_path(id: readable_text.id), style: "color: green;"%></td>
+          <td class="px-6 py-4"><%= link_to "Read now", novels_path(id: readable_text.id) %></td>
           <td class="px-6 py-4"><%= link_to "Edit", edit_readable_text_path(readable_text) %></td>
           <td class="px-6 py-4"><%= button_to "Delete", readable_text, method: :delete, class: "bg-white text-gray-500 border border-gray-200" %></td>
         </tr>
