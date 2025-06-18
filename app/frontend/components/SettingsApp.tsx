@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import RoundedContentBox from "./utilities/RoundedContentBox";
 
 const SettingsApp = () => {
     const [novelReaderTtsVoiceId, setNovelReaderTtsVoiceId] = useState(localStorage.getItem("novelReader.ttsVoiceId"));
@@ -180,24 +181,15 @@ const SettingsApp = () => {
         </section>
     );
     return (
-        <div className="flex-grow">
-            <main id="app-container"
-                  className="pl-5 pr-5 pt-2 pb-2">
-                <div className="w-full
-                    mx-auto rounded-xl bg-white
-                    p-6 cursor-pointer
-                    shadow-lg outline outline-black/5">
-                    <a href="/">Back to Dashboard</a>
+        <RoundedContentBox>
+            <a href="/">Back to Dashboard</a>
 
-                    <form>
-                    {novelReaderSettings}
-                    {texthookerSettings}
-                    {ankiSettings}
-                    </form>
-
-                </div>
-            </main>
-        </div>
+            <form>
+                {novelReaderSettings}
+                {texthookerSettings}
+                {ankiSettings}
+            </form>
+        </RoundedContentBox>
     );
 };
 

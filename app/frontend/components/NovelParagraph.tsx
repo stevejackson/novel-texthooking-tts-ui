@@ -51,11 +51,11 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
     };
 
     const fetchTTSButton = (
-        <PlayCircleIcon className="text-blue-500 size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
+        <PlayCircleIcon className="text-scheme5 hover:brightness-[120%] size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
     );
 
     const stopTTSButton = (
-        <StopCircleIcon className="text-blue-500 size-[24px]" onClick={() => paragraphTtsAudio.pause()} />
+        <StopCircleIcon className="text-scheme5 hover:brightness-[120%] size-[24px]" onClick={() => paragraphTtsAudio.pause()} />
     )
 
     let ttsStartStopButton = fetchTTSButton;
