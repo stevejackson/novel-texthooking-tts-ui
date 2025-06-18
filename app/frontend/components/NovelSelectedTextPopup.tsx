@@ -78,7 +78,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
     });
 
     const fetchTTSButton = (
-        <PlayCircleIcon className="text-blue-500 size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
+        <PlayCircleIcon className="text-scheme2 size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
     );
 
     return (

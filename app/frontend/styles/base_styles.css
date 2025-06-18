@@ -21,7 +21,7 @@ html, body, #root, #app-container {
 
 @layer base {
     a {
-        color: var(--color-scheme2);
+        color: var(--color-scheme5);
     }
 
     h1 {
