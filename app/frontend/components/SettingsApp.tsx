@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import RoundedContentBox from "./utilities/RoundedContentBox";
+import { Button, Checkbox, Label, TextInput, Select} from "flowbite-react";
 
 const SettingsApp = () => {
     const [novelReaderTtsVoiceId, setNovelReaderTtsVoiceId] = useState(localStorage.getItem("novelReader.ttsVoiceId"));
@@ -61,21 +62,21 @@ const SettingsApp = () => {
     }
 
     const ttsVoiceOptions = (
-        <options>
+        <>
             <option value="1501">China/Female - Jing (1501)</option>
             <option value="2402">United Kingdom/Male - Richard (2402)</option>
-        </options>
+        </>
     );
 
     const languageOptions  = (
-        <options>
+        <>
             <option value="EN">English</option>
             <option value="ZH-HANS">Chinese (Simplified)</option>
-        </options>
+        </>
     );
 
     const speedOptions = (
-        <options>
+        <>
             <option value="0.5">0.5x</option>
             <option value="0.6">0.6x</option>
             <option value="0.7">0.7x</option>
@@ -84,84 +85,88 @@ const SettingsApp = () => {
             <option value="1.0">1x</option>
             <option value="1.1">1.1x</option>
             <option value="1.2">1.2x</option>
-        </options>
+        </>
     );
 
     const novelReaderSettings = (
         <section>
             <h2>Novel Reader</h2>
 
-            <div>
-                <label>TTS Voice Id:</label>
-                <select onChange={updateNovelReaderTTSVoiceId} value={novelReaderTtsVoiceId}>
+            <div className="m-[15px]">
+                <Label>TTS Voice Id:</Label>
+                <Select onChange={updateNovelReaderTTSVoiceId} value={novelReaderTtsVoiceId}>
                     {ttsVoiceOptions}
-                </select>
+                </Select>
             </div>
 
-            <div>
-                <label>Content Language:</label>
-                <select onChange={updateNovelReaderContentLanguage} value={novelReaderContentLanguage}>
+            <div className="m-[15px]">
+                <Label>Content Language:</Label>
+                <Select onChange={updateNovelReaderContentLanguage} value={novelReaderContentLanguage}>
                     {languageOptions}
-                </select>
+                </Select>
             </div>
 
-            <div>
-                <label>Translation Language:</label>
-                <select onChange={updateNovelReaderTranslationLanguage} value={novelReaderTranslationLanguage}>
+            <div className="m-[15px]">
+                <Label>Translation Language:</Label>
+                <Select onChange={updateNovelReaderTranslationLanguage} value={novelReaderTranslationLanguage}>
                     {languageOptions}
-                </select>
+                </Select>
             </div>
 
-            <div>
-                <label>Audio Speed:</label>
-                <select onChange={updateNovelReaderAudioSpeed} value={novelReaderAudioSpeed}>
+            <div className="m-[15px]">
+                <Label>Audio Speed:</Label>
+                <Select onChange={updateNovelReaderAudioSpeed} value={novelReaderAudioSpeed}>
                     {speedOptions}
-                </select>
+                </Select>
             </div>
         </section>
     );
 
     const texthookerSettings = (
-        <section className="mt-[50px]">
+        <section className="">
             <h2>Texthooker</h2>
 
-            <div>
-                <label>TTS Voice Id:</label>
-                <select onChange={updateTexthookerTTSVoiceId} value={texthookerTtsVoiceId}>
+            <div className="m-[15px]">
+                <Label>TTS Voice Id:</Label>
+                <Select onChange={updateTexthookerTTSVoiceId} value={texthookerTtsVoiceId}>
                     {ttsVoiceOptions}
-                </select>
+                </Select>
             </div>
 
-            <div>
-                <label>Content Language:</label>
-                <select onChange={updateTexthookerContentLanguage} value={texthookerContentLanguage}>
+            <div className="m-[15px]">
+                <Label>Content Language:</Label>
+                <Select onChange={updateTexthookerContentLanguage} value={texthookerContentLanguage}>
                     {languageOptions}
-                </select>
+                </Select>
             </div>
 
-            <div>
-                <label>Translation Language:</label>
-                <select onChange={updateTexthookerTranslationLanguage} value={texthookerTranslationLanguage}>
+            <div className="m-[15px]">
+                <Label>Translation Language:</Label>
+                <Select onChange={updateTexthookerTranslationLanguage} value={texthookerTranslationLanguage}>
                     {languageOptions}
-                </select>
+                </Select>
             </div>
 
-            <div>
-                <label>Audio Speed:</label>
-                <select onChange={updateTexthookerAudioSpeed} value={texthookerAudioSpeed}>
+            <div className="m-[15px]">
+                <Label>Audio Speed:</Label>
+                <Select onChange={updateTexthookerAudioSpeed} value={texthookerAudioSpeed}>
                     {speedOptions}
-                </select>
+                </Select>
             </div>
         </section>
     );
 
     const ankiSettings = (
-        <section className="mt-[50px]">
+        <section className="">
             <h2>Anki</h2>
 
-            <div>
-                <label>Anki Deck Name:</label>
-                <input type="text"
+            <div className="m-[15px]">
+                <div className="mb-2 block">
+                    <Label htmlFor="ankiDeckName">Anki Deck Name:</Label>
+                </div>
+
+                <TextInput id="ankiDeckName"
+                       type="text"
                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                        placeholder="NT_TTS"
                        required
@@ -175,7 +180,7 @@ const SettingsApp = () => {
         <RoundedContentBox>
             <a href="/">Back to Dashboard</a>
 
-            <form>
+            <form className="flex max-w-md flex-col gap-4">
                 {novelReaderSettings}
                 {texthookerSettings}
                 {ankiSettings}
