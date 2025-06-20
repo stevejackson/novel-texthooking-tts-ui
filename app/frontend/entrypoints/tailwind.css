@@ -12,18 +12,12 @@
 
 @plugin '@tailwindcss/forms';
 
-/*@theme {*/
-/*    --color-scheme1: #275362;*/
-/*    --color-scheme2: #407a61;*/
-/*    --color-scheme3: #abbd8c;*/
-/*    --color-scheme4: #ece2dd;*/
-/*    --color-scheme5: #f8f1f4;*/
-/*}*/
-
 @theme {
         --color-scheme1: #BF4F4E;
         --color-scheme2: #54837e;
         --color-scheme3: #D19FCE;
         --color-scheme4: #D6D2E3;
         --color-scheme5: #E186A7;
+
+        --color-scheme2-brightened: #78a9a3;
 }

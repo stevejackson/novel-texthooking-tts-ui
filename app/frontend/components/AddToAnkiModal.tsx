@@ -143,7 +143,9 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
                     <div className="mb-2 block">
                         <Label htmlFor="Audio">Audio</Label>
                         <div>
-                            <Button size="xs" onClick={generateTtsAudio}>Regenerate Audio & Play</Button>
+                            <Button size="xs" onClick={generateTtsAudio} className="bg-scheme2 hover:bg-scheme2-brightened">
+                                Regenerate Audio & Play
+                            </Button>
                         </div>
 
                         <p className="text-xs text-gray-400">{audioUrl}</p>
@@ -154,20 +156,22 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
                     <div className="mb-2 block relative">
                         <label htmlFor="audio-speed"
                                className="block mb-2 text-sm font-medium text-gray-900">
-                            Audio Speed: {audioSpeed}
+                            Audio Speed: {audioSpeed}x
                         </label>
                         <input id="audio-speed" type="range"
                                min="0.5" max="1.5" onChange={(e) => setAudioSpeed(e.target.value)}
                                step="0.1"
                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"/>
-                        <span className="text-sm text-gray-500 absolute start-0 -bottom-6">0.5x</span>
-                        <span className="text-sm text-gray-500 absolute end-0 -bottom-6">1.5x</span>
+                        <span className="text-sm absolute start-0 -bottom-6">0.5x</span>
+                        <span className="text-sm absolute end-0 -bottom-6">1.5x</span>
                     </div>
                 </div>
 
-                <div className="w-full">
+                <div className="w-full pt-[15px]">
                     {!awaitingSubmissionResult &&
-                        <Button onClick={onSubmit} disabled={missingRequiredFields}>Add to Anki</Button>}
+                        <Button onClick={onSubmit} disabled={missingRequiredFields} className="bg-scheme2 hover:bg-scheme2-brightened">
+                            Add to Anki
+                        </Button>}
                     {awaitingSubmissionResult && awaitingResponseButton}
                 </div>
             </div>
@@ -176,11 +180,11 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
 
     return (
         <>
-            <Button onClick={openModal}>Create Anki Card</Button>
+            <Button className="bg-scheme2 hover:bg-scheme2-brightened" onClick={openModal}>Create Anki Card</Button>
 
             <Modal show={modalOpened} size="md" onClose={onCloseModal} popup>
                 <ModalHeader>
-                    Create Anki Card
+                    <h2 className="text-scheme2">Create Anki Card</h2>
                 </ModalHeader>
 
                 <ModalBody>
