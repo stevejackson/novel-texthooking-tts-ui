@@ -83,11 +83,13 @@ const ankiCardCreationFeatureSetup = async () => {
 
     let observer = new MutationObserver((mutations) => onCreateAnkiCardSubmit());
 
-    observer.observe(document.getElementById("root-anki-submission-observed"), {
-        attributes: true,
-        childList: false,
-        subtree: false
-    });
+    if(document.getElementById("root-anki-submission-observed")) {
+        observer.observe(document.getElementById("root-anki-submission-observed"), {
+            attributes: true,
+            childList: false,
+            subtree: false
+        });
+    }
 
     console.log("NovelTexthookingTTSUI Chrome Extension Loaded");
 }
