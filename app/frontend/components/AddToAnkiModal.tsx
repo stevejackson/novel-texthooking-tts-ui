@@ -89,9 +89,9 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
     const missingRequiredFields = !sentence || !translation || !audioUrl;
 
     const awaitingResponseButton = (
-        <Button disabled={true}>
+        <Button disabled={true} className="bg-scheme2 hover:bg-scheme2-brightened">
             <div role="status">
-                <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-scheme2"
                      viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -142,8 +142,8 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor="Audio">Audio</Label>
-                        <div>
-                            <Button size="xs" onClick={generateTtsAudio} className="bg-scheme2 hover:bg-scheme2-brightened">
+                        <div className="mt-[10px]">
+                            <Button id="Audio" size="xs" onClick={generateTtsAudio} className="bg-scheme2 hover:bg-scheme2-brightened">
                                 Regenerate Audio & Play
                             </Button>
                         </div>
@@ -161,7 +161,7 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
                         <input id="audio-speed" type="range"
                                min="0.5" max="1.5" onChange={(e) => setAudioSpeed(e.target.value)}
                                step="0.1"
-                               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"/>
+                               className="w-full h-2 bg-gray-200 rounded-lg accent-scheme2 appearance-none cursor-pointer"/>
                         <span className="text-sm absolute start-0 -bottom-6">0.5x</span>
                         <span className="text-sm absolute end-0 -bottom-6">1.5x</span>
                     </div>
@@ -180,7 +180,9 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
 
     return (
         <>
-            <Button className="bg-scheme2 hover:bg-scheme2-brightened" onClick={openModal}>Create Anki Card</Button>
+            <Button className="bg-scheme2 hover:bg-scheme2-brightened" onClick={openModal}>
+                Create Anki Card
+            </Button>
 
             <Modal show={modalOpened} size="md" onClose={onCloseModal} popup>
                 <ModalHeader>
