@@ -60,6 +60,33 @@ const SettingsApp = () => {
         setAnkiDeckName(e.target.value);
     }
 
+    const ttsVoiceOptions = (
+        <options>
+            <option value="1501">China/Female - Jing (1501)</option>
+            <option value="2402">United Kingdom/Male - Richard (2402)</option>
+        </options>
+    );
+
+    const languageOptions  = (
+        <options>
+            <option value="EN">English</option>
+            <option value="ZH-HANS">Chinese (Simplified)</option>
+        </options>
+    );
+
+    const speedOptions = (
+        <options>
+            <option value="0.5">0.5x</option>
+            <option value="0.6">0.6x</option>
+            <option value="0.7">0.7x</option>
+            <option value="0.8">0.8x</option>
+            <option value="0.9">0.9x</option>
+            <option value="1.0">1x</option>
+            <option value="1.1">1.1x</option>
+            <option value="1.2">1.2x</option>
+        </options>
+    );
+
     const novelReaderSettings = (
         <section>
             <h2>Novel Reader</h2>
@@ -67,46 +94,28 @@ const SettingsApp = () => {
             <div>
                 <label>TTS Voice Id:</label>
                 <select onChange={updateNovelReaderTTSVoiceId} value={novelReaderTtsVoiceId}>
-                    <options>
-                        <option value="1501">China/Female - Jing (1501)</option>
-                        <option value="2402">United Kingdom/Male - Richard (2402)</option>
-                    </options>
+                    {ttsVoiceOptions}
                 </select>
             </div>
 
             <div>
                 <label>Content Language:</label>
                 <select onChange={updateNovelReaderContentLanguage} value={novelReaderContentLanguage}>
-                    <options>
-                        <option value="EN">English</option>
-                        <option value="ZH-HANS">Chinese (Simplified)</option>
-                    </options>
+                    {languageOptions}
                 </select>
             </div>
 
             <div>
                 <label>Translation Language:</label>
                 <select onChange={updateNovelReaderTranslationLanguage} value={novelReaderTranslationLanguage}>
-                    <options>
-                        <option value="EN">English</option>
-                        <option value="ZH-HANS">Chinese (Simplified)</option>
-                    </options>
+                    {languageOptions}
                 </select>
             </div>
 
             <div>
                 <label>Audio Speed:</label>
                 <select onChange={updateNovelReaderAudioSpeed} value={novelReaderAudioSpeed}>
-                    <options>
-                        <option value="0.5">0.5x</option>
-                        <option value="0.6">0.6x</option>
-                        <option value="0.7">0.7x</option>
-                        <option value="0.8">0.8x</option>
-                        <option value="0.9">0.9x</option>
-                        <option value="1.0">1x</option>
-                        <option value="1.1">1.1x</option>
-                        <option value="1.2">1.2x</option>
-                    </options>
+                    {speedOptions}
                 </select>
             </div>
         </section>
@@ -119,46 +128,28 @@ const SettingsApp = () => {
             <div>
                 <label>TTS Voice Id:</label>
                 <select onChange={updateTexthookerTTSVoiceId} value={texthookerTtsVoiceId}>
-                    <options>
-                        <option value="1501">China/Female - Jing (1501)</option>
-                        <option value="2402">United Kingdom/Male - Richard (2402)</option>
-                    </options>
+                    {ttsVoiceOptions}
                 </select>
             </div>
 
             <div>
                 <label>Content Language:</label>
                 <select onChange={updateTexthookerContentLanguage} value={texthookerContentLanguage}>
-                    <options>
-                        <option value="EN">English</option>
-                        <option value="ZH-HANS">Chinese (Simplified)</option>
-                    </options>
+                    {languageOptions}
                 </select>
             </div>
 
             <div>
                 <label>Translation Language:</label>
                 <select onChange={updateTexthookerTranslationLanguage} value={texthookerTranslationLanguage}>
-                    <options>
-                        <option value="EN">English</option>
-                        <option value="ZH-HANS">Chinese (Simplified)</option>
-                    </options>
+                    {languageOptions}
                 </select>
             </div>
 
             <div>
                 <label>Audio Speed:</label>
                 <select onChange={updateTexthookerAudioSpeed} value={texthookerAudioSpeed}>
-                    <options>
-                        <option value="0.5">0.5x</option>
-                        <option value="0.6">0.6x</option>
-                        <option value="0.7">0.7x</option>
-                        <option value="0.8">0.8x</option>
-                        <option value="0.9">0.9x</option>
-                        <option value="1.0">1x</option>
-                        <option value="1.1">1.1x</option>
-                        <option value="1.2">1.2x</option>
-                    </options>
+                    {speedOptions}
                 </select>
             </div>
         </section>
@@ -176,10 +167,10 @@ const SettingsApp = () => {
                        required
                        onChange={updateAnkiDeckName}
                        value={ankiDeckName} />
-
             </div>
         </section>
     );
+
     return (
         <RoundedContentBox>
             <a href="/">Back to Dashboard</a>
