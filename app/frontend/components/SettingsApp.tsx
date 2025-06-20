@@ -178,8 +178,6 @@ const SettingsApp = () => {
 
     return (
         <RoundedContentBox>
-            <a href="/">Back to Dashboard</a>
-
             <form className="flex max-w-md flex-col gap-4">
                 {novelReaderSettings}
                 {texthookerSettings}
