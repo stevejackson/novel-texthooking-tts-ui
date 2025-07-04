@@ -29,7 +29,7 @@ class ReadableTextsController < ApplicationController
   # PATCH/PUT /readable_texts/1
   def update
     if @readable_text.update(readable_text_params)
-      redirect_to @readable_text, notice: "Readable text was successfully updated.", status: :see_other
+      redirect_to readable_texts_path, notice: "Readable text was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
