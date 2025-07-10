@@ -8,5 +8,6 @@ const RootComponent = () => (
     </React.StrictMode>
 )
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RootComponent />);
+const settingsDomNode = document.getElementById('settings-root');
+const settingsRoot = ReactDOM.createRoot(settingsDomNode);
+settingsRoot.render(<RootComponent />);
