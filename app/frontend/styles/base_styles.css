@@ -19,6 +19,17 @@ html, body, #root, #app-container {
     @apply text-gray-800;
 }
 
+.hide-on-mobile {
+    display: block; /* Default for larger screens */
+}
+
+@media only screen and (max-width: 767px) {
+    .hide-on-mobile {
+        display: none; /* Hide on screens smaller than 768px (common mobile breakpoint) */
+    }
+}
+
+
 @layer base {
     a {
         color: var(--color-scheme5);

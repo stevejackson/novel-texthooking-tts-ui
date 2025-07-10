@@ -179,7 +179,7 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
     }
 
     return (
-        <>
+        <div className="hide-on-mobile">
             <Button className="bg-scheme2 hover:bg-scheme2-brightened" onClick={openModal}>
                 Create Anki Card
             </Button>
@@ -193,7 +193,7 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
                     {modalBody}
                 </ModalBody>
             </Modal>
-        </>
+        </div>
     );
 }
 
