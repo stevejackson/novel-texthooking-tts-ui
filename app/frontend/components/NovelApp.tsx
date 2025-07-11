@@ -33,7 +33,8 @@ const NovelApp = () => {
     }
 
     useEffect(() => {
-        document.addEventListener("contextmenu", updateSelection);
+        // document.addEventListener("contextmenu", updateSelection);
+        document.addEventListener("selectionchange", () => window.getSelection().toString());
     }, []);
 
     if(loading) {
