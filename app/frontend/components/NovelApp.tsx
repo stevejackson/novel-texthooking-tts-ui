@@ -41,7 +41,7 @@ const NovelApp = () => {
                 this.cancel();
             }
 
-            this.timeoutID = setTimeout(this.updateSelection, 500);
+            this.timeoutID = setTimeout(this.updateSelection, 800);
         },
 
         cancel() {
