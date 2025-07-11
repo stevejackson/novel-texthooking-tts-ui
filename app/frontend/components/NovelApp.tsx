@@ -31,6 +31,10 @@ const NovelApp = () => {
     const selectionEvent = {
         updateSelection() {
             const text = document.getSelection().toString();
+            if(text === "") {
+                // If text is deselected e.g. by playing audio or something, don't remove the popup.
+                return;
+            }
             console.log("Selected text: " + text);
             setSelection(text);
             this.timeoutID = undefined;
