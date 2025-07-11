@@ -28,13 +28,30 @@ const NovelApp = () => {
 
     console.log({ error, loading, data });
 
-    const updateSelection = (e) => {
-        setTimeout(() => setSelection(window.getSelection().toString(), 100));
-    }
+    const selectionEvent = {
+        updateSelection() {
+            const text = document.getSelection().toString();
+            console.log("Selected text: " + text);
+            setSelection(text);
+            this.timeoutID = undefined;
+        },
+
+        setup() {
+            if (typeof this.timeoutID === "number") {
+                this.cancel();
+            }
+
+            this.timeoutID = setTimeout(this.updateSelection, 500);
+        },
+
+        cancel() {
+            clearTimeout(this.timeoutID);
+        },
+    };
+
 
     useEffect(() => {
-        // document.addEventListener("contextmenu", updateSelection);
-        document.addEventListener("selectionchange", () => window.getSelection().toString());
+        document.addEventListener("selectionchange", () => selectionEvent.setup());
     }, []);
 
     if(loading) {
@@ -59,8 +76,7 @@ const NovelApp = () => {
             />}
 
             <RoundedContentBox>
-                <div className="whitespace-pre-wrap"
-                     onClick={updateSelection}>
+                <div className="whitespace-pre-wrap">
                     {data.fetchReadableText.segmentedParagraphs.map((paragraph) =>
                         <NovelParagraph sentences={paragraph}/>
                     )}
