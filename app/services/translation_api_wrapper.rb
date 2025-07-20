@@ -16,8 +16,9 @@ class TranslationApiWrapper
   private
 
   def fetch_from_deepl
+    deepl_endpoint = Rails.application.credentials.deepl.endpoint
     conn = Faraday.new(
-      url: "https://api-free.deepl.com/v2/translate",
+      url: deepl_endpoint + "/v2/translate",
       params: {}
     ) do |f|
       f.request :json
