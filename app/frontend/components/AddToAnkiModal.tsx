@@ -170,7 +170,7 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
                 <div className="w-full pt-[15px]">
                     {!awaitingSubmissionResult &&
                         <Button onClick={onSubmit} disabled={missingRequiredFields} className="bg-scheme2 hover:bg-scheme2-brightened">
-                            Add to Anki
+                            Anki
                         </Button>}
                     {awaitingSubmissionResult && awaitingResponseButton}
                 </div>
@@ -181,7 +181,7 @@ const AddToAnkiModal: React.FC<AddToAnkiModalProps> = ({ initialSentence, initia
     return (
         <div className="hide-on-mobile">
             <Button className="bg-scheme2 hover:bg-scheme2-brightened" onClick={openModal}>
-                Create Anki Card
+                Anki
             </Button>
 
             <Modal show={modalOpened} size="md" onClose={onCloseModal} popup>

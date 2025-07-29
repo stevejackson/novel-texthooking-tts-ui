@@ -17,7 +17,8 @@
     "react-dom": "^19.1.0",
     "react-hotkeys-hook": "^5.1.0",
     "stimulus-vite-helpers": "^3.1.0",
-    "tailwindcss": "4.1.4"
+    "tailwindcss": "4.1.4",
+    "use-sound": "^5.0.0"
   },
   "scripts": {
     "build": "vite build --outDir public",

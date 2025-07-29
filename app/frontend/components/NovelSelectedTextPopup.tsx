@@ -10,27 +10,35 @@ interface NovelSelectedTextPopupProps {
     translationLanguage: string;
     ttsVoiceId: string;
     audioSpeed: string;
+    masterTTSAudio: HTMLAudioElement;
+    setMasterTTSAudio: Function;
+    masterTTSAudioText: string;
+    setMasterTTSAudioText: Function;
 }
 
-const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed }) => {
+const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
+    { selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed, masterTTSAudio, setMasterTTSAudio,
+      masterTTSAudioText, setMasterTTSAudioText }
+) => {
     const [translatedText, setTranslatedText] = React.useState();
     const [ttsFileUrl, setTtsFileUrl] = React.useState();
-    const [audioElement, setAudioElement] = React.useState<HTMLAudioElement | null>();
     const [previouslyFetchedAudioText, setPreviouslyFetchedAudioText] = React.useState();
 
     const fetchTts = () => {
-        if(previouslyFetchedAudioText === selectedText) {
-            console.log("Using existing TTS audio instead of fetching new TTS");
-            audioElement.currentTime = 0;
-            audioElement.play();
-            return;
-        }
+        // if(previouslyFetchedAudioText === selectedText) {
+        //     console.log("Using existing TTS audio instead of fetching new TTS");
+        //     masterTTSAudio.currentTime = 0;
+        //     masterTTSAudio.play();
+        //     return;
+        // }
 
         const post_data = {
             text: selectedText,
             voice_id: ttsVoiceId,
             audio_speed: audioSpeed,
         };
+
+        setMasterTTSAudioText(null);
 
         axios({
             method: "post",
@@ -45,8 +53,12 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
                     setTtsFileUrl(url);
                     setPreviouslyFetchedAudioText(selectedText);
 
+                    if(masterTTSAudio) {
+                        masterTTSAudio.pause();
+                    }
+
                     let audio = new Audio(url);
-                    setAudioElement(audio);
+                    setMasterTTSAudio(audio);
                     audio.play();
                 }
             });
@@ -87,11 +99,10 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
                             max-h-[300px]
                             p-6
                             mx-auto rounded-xl bg-white
-                            cursor-pointer
                             shadow-xl outline outline-black/5 drop-shadow-xl/30">
                 <div className="flex">
                     <div className="w-[48px]">
-                        {fetchTTSButton}
+                        {selectedText && fetchTTSButton}
                     </div>
 
                     <div className="flex-1">
@@ -105,11 +116,13 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = ({ selecte
                     </div>
 
                     <div>
-                        <AddToAnkiModal initialSentence={selectedText}
-                                        initialTranslation={translatedText}
-                                        initialAudioUrl={ttsFileUrl}
-                                        ttsVoiceId={ttsVoiceId}
-                        />
+                        {selectedText &&
+                            <AddToAnkiModal initialSentence={selectedText}
+                                            initialTranslation={translatedText}
+                                            initialAudioUrl={ttsFileUrl}
+                                            ttsVoiceId={ttsVoiceId}
+                            />
+                        }
                     </div>
                 </div>
             </div>
