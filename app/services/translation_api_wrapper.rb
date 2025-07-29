@@ -9,14 +9,16 @@ class TranslationApiWrapper
   def translate
     case @service
     when "deepl"
-      fetch_from_deepl
+      Rails.cache.fetch("deepl-#{@text}-#{@content_language}-#{@translation_language}", expires_in: 10.seconds) do
+        fetch_from_deepl
+      end
     end
   end
 
   private
 
   def fetch_from_deepl
-    deepl_endpoint = Rails.application.credentials.deepl.endpoint
+    deepl_endpoint = Rails.application.credentials.deepl.endpoint!
     conn = Faraday.new(
       url: deepl_endpoint + "/v2/translate",
       params: {}
