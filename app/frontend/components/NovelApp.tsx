@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import NovelParagraph from "./NovelParagraph";
 import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
 import RoundedContentBox from "./utilities/RoundedContentBox";
 import { useQuery, gql } from "@apollo/client";
+import { NovelReaderContext } from './NovelReaderContext.js';
 
 const NovelApp = () => {
     const [selection, setSelection] = React.useState("");
@@ -72,6 +73,9 @@ const NovelApp = () => {
         )
     }
 
+    const { novelReaderState } = useContext(GlobalStateContext);
+
+
     return (
         <>
             <NovelSelectedTextPopup selectedText={selection}
@@ -95,7 +99,7 @@ const NovelApp = () => {
                     )}
                 </div>
             </RoundedContentBox>
-        </>
+        </NovelReaderContext.Provider>
     );
 };
 

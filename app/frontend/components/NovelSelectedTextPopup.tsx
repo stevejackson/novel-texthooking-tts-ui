@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from "axios";
-import {PlayCircleIcon} from "@heroicons/react/24/outline";
+import {PlayCircleIcon, StopCircleIcon} from "@heroicons/react/24/outline";
 import VerticalDivider from "./utilities/VerticalDivider";
 import AddToAnkiModal from "./AddToAnkiModal";
 
@@ -89,18 +89,50 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
             });
     });
 
+    const stopTTSAudio = () => {
+        masterTTSAudio.pause();
+        setMasterTTSAudioText(null);
+    }
+
     const fetchTTSButton = (
         <PlayCircleIcon className="text-scheme5 hover:brightness-[120%] size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
     );
+    const stopAudioButton = (
+        <StopCircleIcon className="text-scheme5 hover:brightness-[120%] size-[24px] cursor-pointer" onClick={stopTTSAudio} />
+    );
 
     return (
-        <header className="sticky z-50 top-0 pl-5 pr-5 pt-2 pb-2 overflow-hidden max-w-6xl mx-auto px-4">
+        <header className="sticky z-50 top-0 px-3 lg:px-5 pt-2 pb-2 overflow-hidden max-w-6xl mx-auto">
             <div className="w-full
                             max-h-[300px]
-                            p-6
+                            p-2 lg:p-6
                             mx-auto rounded-xl bg-white
                             shadow-xl outline outline-black/5 drop-shadow-xl/30">
+                <div className="flex border-b-[3px] border-gray-300">
+                    <div className="h-75/100
+                            min-h-75/100
+                            w-[2px]
+                            mr-[15px]
+                            ml-[15px]
+                            bg-neutral-300" />
+                    <div className="flex-1">
+                        <label className="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" className="sr-only peer"/>
+                            <div
+                                className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Autoplay</span>
+                        </label>
+                    </div>
+
+                    <VerticalDivider />
+
+                    <div className="flex-1">
+                        {stopAudioButton}
+                    </div>
+                </div>
+
                 <div className="flex">
+
                     <div className="w-[48px]">
                         {selectedText && fetchTTSButton}
                     </div>
@@ -109,7 +141,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
                         {selectedText}
                     </div>
 
-                    <VerticalDivider />
+                    <VerticalDivider/>
 
                     <div className="flex-1">
                         {translatedText}
