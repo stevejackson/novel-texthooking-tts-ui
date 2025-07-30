@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import axios from "axios";
 import {PlayCircleIcon, StopCircleIcon} from "@heroicons/react/24/outline";
 import VerticalDivider from "./utilities/VerticalDivider";
 import AddToAnkiModal from "./AddToAnkiModal";
+import {NovelReaderContext} from "./NovelReaderContext";
 
 interface NovelSelectedTextPopupProps {
     selectedText: string;
@@ -10,35 +11,26 @@ interface NovelSelectedTextPopupProps {
     translationLanguage: string;
     ttsVoiceId: string;
     audioSpeed: string;
-    masterTTSAudio: HTMLAudioElement;
-    setMasterTTSAudio: Function;
-    masterTTSAudioText: string;
-    setMasterTTSAudioText: Function;
 }
 
 const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
-    { selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed, masterTTSAudio, setMasterTTSAudio,
-      masterTTSAudioText, setMasterTTSAudioText }
+    { selectedText, contentLanguage, translationLanguage, ttsVoiceId, audioSpeed }
 ) => {
     const [translatedText, setTranslatedText] = React.useState();
     const [ttsFileUrl, setTtsFileUrl] = React.useState();
-    const [previouslyFetchedAudioText, setPreviouslyFetchedAudioText] = React.useState();
+    const { novelReaderState, setNovelReaderState } = useContext(NovelReaderContext);
 
     const fetchTts = () => {
-        // if(previouslyFetchedAudioText === selectedText) {
-        //     console.log("Using existing TTS audio instead of fetching new TTS");
-        //     masterTTSAudio.currentTime = 0;
-        //     masterTTSAudio.play();
-        //     return;
-        // }
-
         const post_data = {
             text: selectedText,
             voice_id: ttsVoiceId,
             audio_speed: audioSpeed,
         };
 
-        setMasterTTSAudioText(null);
+        setNovelReaderState({
+            ...novelReaderState,
+            masterTTSAudioText: null
+        })
 
         axios({
             method: "post",
@@ -51,15 +43,24 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
 
                 if(url) {
                     setTtsFileUrl(url);
-                    setPreviouslyFetchedAudioText(selectedText);
 
-                    if(masterTTSAudio) {
-                        masterTTSAudio.pause();
+                    if(novelReaderState.masterTTSAudio) {
+                        novelReaderState.masterTTSAudio.pause();
                     }
 
                     let audio = new Audio(url);
-                    setMasterTTSAudio(audio);
+                    setNovelReaderState({
+                        ...novelReaderState,
+                        masterTTSAudio: audio,
+                        masterTTSAudioText: selectedText
+                    })
                     audio.play();
+                    audio.addEventListener("ended", function() {
+                        setNovelReaderState({
+                            ...novelReaderState,
+                            masterTTSAudioText: null
+                        });
+                    });
                 }
             });
     }
@@ -90,8 +91,13 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
     });
 
     const stopTTSAudio = () => {
-        masterTTSAudio.pause();
-        setMasterTTSAudioText(null);
+        if(novelReaderState.masterTTSAudio) {
+            novelReaderState.masterTTSAudio.pause();
+        }
+        setNovelReaderState({
+            ...novelReaderState,
+            masterTTSAudioText: null
+        });
     }
 
     const fetchTTSButton = (
@@ -138,7 +144,9 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
                     </div>
 
                     <div className="flex-1">
-                        {selectedText}
+                        <div className={selectedText === novelReaderState.masterTTSAudioText ? "bg-yellow-100" : null}>
+                            {selectedText}
+                        </div>
                     </div>
 
                     <VerticalDivider/>

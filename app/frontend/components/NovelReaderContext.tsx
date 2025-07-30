@@ -1,3 +1,3 @@
 import { createContext } from 'react';
 
-export const NovelReaderContext = createContext({ masterTTSAudio: null });
+export const NovelReaderContext = createContext();

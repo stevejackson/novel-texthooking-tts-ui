@@ -1,45 +1,26 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {PlayCircleIcon, StopCircleIcon} from "@heroicons/react/24/outline";
 import axios from "axios";
+import { NovelReaderContext } from './NovelReaderContext';
 
 interface NovelParagraphProps {
     sentences: Array<string>;
-    masterTTSAudio: HTMLAudioElement;
-    setMasterTTSAudio: (audio: HTMLAudioElement) => void;
-    masterTTSAudioText: string;
-    setMasterTTSAudioText: (string) => void;
 }
 
-const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences, masterTTSAudio, setMasterTTSAudio, masterTTSAudioText, setMasterTTSAudioText }) => {
-    // const [paragraphTtsAudio, setParagraphTtsAudio] = useState(null);
+const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
+    const { novelReaderState, setNovelReaderState } = useContext(NovelReaderContext);
 
     const ttsContent = sentences.join(" ");
 
     const handleTtsFetchClicked = (e) => {
         e.preventDefault();
 
-        /*
-        if(masterTTSAudio !== null) {
-            console.log("Already have this audio fetched.");
-
-            if(paragraphTtsAudio.isPaused || paragraphTtsAudio.currentTime === 0) {
-                console.log("It was paused. Playing again.");
-                paragraphTtsAudio.play();
-            }
-            else {
-                console.log("Pausing it.");
-                paragraphTtsAudio.pause();
-                paragraphTtsAudio.currentTime = 0;
-            }
-            return;
-        }
-        */
-
         const post_data = {
             text: ttsContent,
             voice_id: localStorage.getItem("novelReader.ttsVoiceId"),
             audio_speed: localStorage.getItem("novelReader.audioSpeed"),
         };
+
 
         axios({
             method: "post",
@@ -51,18 +32,23 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences, masterTTSAud
                 console.log("TTS File fetched, URL result: " + url);
 
                 if(url) {
-                    if(masterTTSAudio) {
-                        masterTTSAudio.pause();
+                    if(novelReaderState.masterTTSAudio) {
+                        novelReaderState.masterTTSAudio.pause();
                     }
 
-                    setMasterTTSAudioText(ttsContent);
-
                     let audio = new Audio(url);
-                    setMasterTTSAudio(audio);
-                    audio.play();
+                    setNovelReaderState({
+                        ...novelReaderState,
+                        masterTTSAudio: audio,
+                        masterTTSAudioText: ttsContent
+                    });
 
+                    audio.play();
                     audio.addEventListener("ended", function() {
-                        setMasterTTSAudioText(null);
+                        setNovelReaderState({
+                            ...novelReaderState,
+                            masterTTSAudioText: null
+                        });
                     });
                 }
             });
@@ -71,10 +57,6 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences, masterTTSAud
     const fetchTTSButton = (
         <PlayCircleIcon className="text-scheme5 hover:brightness-[120%] size-[24px] cursor-pointer" onClick={handleTtsFetchClicked} />
     );
-
-    const stopTTSButton = (
-        <StopCircleIcon className="text-scheme5 hover:brightness-[120%] size-[24px]" onClick={() => masterTTSAudio.pause()} />
-    )
 
     let ttsStartStopButton = fetchTTSButton;
 
@@ -85,7 +67,7 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences, masterTTSAud
             </div>
 
             <div className="flex-1 pl-[10px]">
-                <div className={ttsContent === masterTTSAudioText ? "bg-yellow-100" : null}>
+                <div className={ttsContent === novelReaderState.masterTTSAudioText ? "bg-yellow-100" : null}>
                     {sentences.map((sentence) => (
                         <div>{sentence}</div>
                     ))}

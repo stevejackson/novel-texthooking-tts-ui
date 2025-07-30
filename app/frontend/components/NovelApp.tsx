@@ -3,12 +3,17 @@ import NovelParagraph from "./NovelParagraph";
 import NovelSelectedTextPopup from "./NovelSelectedTextPopup";
 import RoundedContentBox from "./utilities/RoundedContentBox";
 import { useQuery, gql } from "@apollo/client";
-import { NovelReaderContext } from './NovelReaderContext.js';
+import { NovelReaderContext } from './NovelReaderContext';
 
 const NovelApp = () => {
     const [selection, setSelection] = React.useState("");
-    const [masterTTSAudio, setMasterTTSAudio] = React.useState();
-    const [masterTTSAudioText, setMasterTTSAudioText] = React.useState();
+
+    // Default state
+    const [novelReaderState, setNovelReaderState] = useState({
+        masterTTSAudio: null,
+        masterTTSAudioText: null,
+    });
+
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
@@ -73,29 +78,19 @@ const NovelApp = () => {
         )
     }
 
-    const { novelReaderState } = useContext(GlobalStateContext);
-
-
     return (
-        <>
+        <NovelReaderContext.Provider value={{ novelReaderState, setNovelReaderState }}>
             <NovelSelectedTextPopup selectedText={selection}
                                     contentLanguage={localStorage.getItem("novelReader.contentLanguage")}
                                     translationLanguage={localStorage.getItem("novelReader.translationLanguage")}
                                     ttsVoiceId={localStorage.getItem("novelReader.ttsVoiceId")}
                                     audioSpeed={localStorage.getItem("novelReader.audioSpeed")}
-                                    masterTTSAudio={masterTTSAudio}
-                                    setMasterTTSAudio={setMasterTTSAudio}
-                                    masterTTSAudioText={masterTTSAudioText}
-                                    setMasterTTSAudioText={setMasterTTSAudioText}
             />
 
             <RoundedContentBox>
                 <div className="whitespace-pre-wrap">
                     {data.fetchReadableText.segmentedParagraphs.map((paragraph) =>
-                        <NovelParagraph sentences={paragraph} masterTTSAudio={masterTTSAudio} setMasterTTSAudio={setMasterTTSAudio}
-                                        masterTTSAudioText={masterTTSAudioText}
-                                        setMasterTTSAudioText={setMasterTTSAudioText}
-                        />
+                        <NovelParagraph sentences={paragraph} />
                     )}
                 </div>
             </RoundedContentBox>
