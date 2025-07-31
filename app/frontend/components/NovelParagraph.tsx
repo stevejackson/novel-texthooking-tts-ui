@@ -8,20 +8,18 @@ interface NovelParagraphProps {
     paragraphIndex: number;
 }
 
-const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex, sentences }) => {
+const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex }) => {
     const { novelReaderState, setNovelReaderState } = useContext(NovelReaderContext);
 
     const playTTSByParagraphIndex = (paragraphIndex) => {
         console.log("Playing TTS for paragraph: ", paragraphIndex);
-    }
 
-    const ttsContent = sentences.join(" ");
+        if(paragraphIndex >= novelReaderState.paragraphs.length) {
+            console.log("Stopping TTS playback, reached end of paragraphs");
+            return;
+        }
 
-    const handleTtsFetchClicked = (e) => {
-        e.preventDefault();
-
-        
-
+        const ttsContent = novelReaderState.paragraphs[paragraphIndex].join(" ");
         const post_data = {
             text: ttsContent,
             voice_id: localStorage.getItem("novelReader.ttsVoiceId"),
@@ -46,24 +44,30 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex, sentenc
                     setNovelReaderState({
                         ...novelReaderState,
                         masterTTSAudio: audio,
-                        masterTTSAudioText: ttsContent,
                         currentlyPlayingParagraph: paragraphIndex
                     });
 
                     audio.play();
                     audio.addEventListener("ended", function() {
                         if(localStorage.getItem("novelReader.autoplay") === "true") {
+                            playTTSByParagraphIndex(paragraphIndex + 1)
                         }
                         else {
                             setNovelReaderState({
                                 ...novelReaderState,
-                                masterTTSAudioText: null,
                                 currentlyPlayingParagraph: null
                             });
                         }
                     });
                 }
             });
+    }
+
+
+    const handleTtsFetchClicked = (e) => {
+        e.preventDefault();
+
+        playTTSByParagraphIndex(paragraphIndex);
     };
 
     const fetchTTSButton = (
@@ -79,8 +83,8 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex, sentenc
             </div>
 
             <div className="flex-1 pl-[10px]">
-                <div className={ttsContent === novelReaderState.masterTTSAudioText ? "bg-yellow-100" : null}>
-                    {sentences.map((sentence, idx) => (
+                <div className={paragraphIndex === novelReaderState.currentlyPlayingParagraph ? "bg-yellow-100" : null}>
+                    {novelReaderState.paragraphs[paragraphIndex].map((sentence, idx) => (
                         <div key={idx}>{sentence}</div>
                     ))}
                 </div>

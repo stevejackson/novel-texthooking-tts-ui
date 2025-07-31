@@ -28,11 +28,6 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
             audio_speed: audioSpeed,
         };
 
-        setNovelReaderState({
-            ...novelReaderState,
-            masterTTSAudioText: null
-        })
-
         axios({
             method: "post",
             url: "/api/v1/tts/fetch",
@@ -52,16 +47,9 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
                     let audio = new Audio(url);
                     setNovelReaderState({
                         ...novelReaderState,
-                        masterTTSAudio: audio,
-                        masterTTSAudioText: selectedText
+                        masterTTSAudio: audio
                     })
                     audio.play();
-                    audio.addEventListener("ended", function() {
-                        setNovelReaderState({
-                            ...novelReaderState,
-                            masterTTSAudioText: null
-                        });
-                    });
                 }
             });
     }
@@ -105,7 +93,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
         }
         setNovelReaderState({
             ...novelReaderState,
-            masterTTSAudioText: null
+            currentlyPlayingParagraph: null
         });
     }
 
@@ -156,9 +144,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
                     </div>
 
                     <div className="flex-1">
-                        <div className={selectedText === novelReaderState.masterTTSAudioText ? "bg-yellow-100" : null}>
-                            {selectedText}
-                        </div>
+                        {selectedText}
                     </div>
 
                     <VerticalDivider/>

@@ -11,7 +11,6 @@ const NovelApp = () => {
     // Default state
     const [novelReaderState, setNovelReaderState] = useState({
         masterTTSAudio: null,
-        masterTTSAudioText: null,
         currentlyPlayingParagraph: null,
         paragraphs: null
     });
