@@ -5,22 +5,28 @@ import { NovelReaderContext } from './NovelReaderContext';
 
 interface NovelParagraphProps {
     sentences: Array<string>;
+    paragraphIndex: number;
 }
 
-const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
+const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex, sentences }) => {
     const { novelReaderState, setNovelReaderState } = useContext(NovelReaderContext);
+
+    const playTTSByParagraphIndex = (paragraphIndex) => {
+        console.log("Playing TTS for paragraph: ", paragraphIndex);
+    }
 
     const ttsContent = sentences.join(" ");
 
     const handleTtsFetchClicked = (e) => {
         e.preventDefault();
 
+        
+
         const post_data = {
             text: ttsContent,
             voice_id: localStorage.getItem("novelReader.ttsVoiceId"),
             audio_speed: localStorage.getItem("novelReader.audioSpeed"),
         };
-
 
         axios({
             method: "post",
@@ -40,15 +46,21 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
                     setNovelReaderState({
                         ...novelReaderState,
                         masterTTSAudio: audio,
-                        masterTTSAudioText: ttsContent
+                        masterTTSAudioText: ttsContent,
+                        currentlyPlayingParagraph: paragraphIndex
                     });
 
                     audio.play();
                     audio.addEventListener("ended", function() {
-                        setNovelReaderState({
-                            ...novelReaderState,
-                            masterTTSAudioText: null
-                        });
+                        if(localStorage.getItem("novelReader.autoplay") === "true") {
+                        }
+                        else {
+                            setNovelReaderState({
+                                ...novelReaderState,
+                                masterTTSAudioText: null,
+                                currentlyPlayingParagraph: null
+                            });
+                        }
                     });
                 }
             });
@@ -68,8 +80,8 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ sentences }) => {
 
             <div className="flex-1 pl-[10px]">
                 <div className={ttsContent === novelReaderState.masterTTSAudioText ? "bg-yellow-100" : null}>
-                    {sentences.map((sentence) => (
-                        <div>{sentence}</div>
+                    {sentences.map((sentence, idx) => (
+                        <div key={idx}>{sentence}</div>
                     ))}
                 </div>
             </div>
