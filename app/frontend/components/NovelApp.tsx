@@ -8,6 +8,10 @@ import { NovelReaderContext } from './NovelReaderContext';
 const NovelApp = () => {
     const [selection, setSelection] = React.useState("");
 
+    if(!localStorage.getItem("novelReader.autoplay")) {
+        localStorage.setItem("novelReader.autoplay", "false");
+    }
+
     // Default state
     const [novelReaderState, setNovelReaderState] = useState({
         masterTTSAudio: null,
