@@ -7,6 +7,7 @@ const SettingsApp = () => {
     const [novelReaderContentLanguage, setNovelReaderContentLanguage] = useState(localStorage.getItem("novelReader.contentLanguage"));
     const [novelReaderTranslationLanguage, setNovelReaderTranslationLanguage] = useState(localStorage.getItem("novelReader.translationLanguage"));
     const [novelReaderAudioSpeed, setNovelReaderAudioSpeed] = useState(localStorage.getItem("novelReader.audioSpeed"));
+    const [novelReaderFontSize, setNovelReaderFontSize] = useState(localStorage.getItem("novelReader.fontSize"));
 
     const [texthookerTtsVoiceId, setTexthookerTtsVoiceId] = useState(localStorage.getItem("texthooker.ttsVoiceId"));
     const [texthookerContentLanguage, setTexthookerContentLanguage] = useState(localStorage.getItem("texthooker.contentLanguage"));
@@ -35,6 +36,13 @@ const SettingsApp = () => {
         localStorage.setItem("novelReader.audioSpeed", e.target.value);
         setNovelReaderAudioSpeed(e.target.value);
     }
+
+    const updateNovelReaderFontSize = (e) => {
+        localStorage.setItem("novelReader.fontSize", e.target.value);
+        setNovelReaderFontSize(e.target.value);
+    }
+
+    /****/
 
     const updateTexthookerTTSVoiceId = (e) => {
         localStorage.setItem("texthooker.ttsVoiceId", e.target.value);
@@ -88,6 +96,18 @@ const SettingsApp = () => {
         </>
     );
 
+    const fontSizeOptions = (
+        <>
+            <option value="10px">10px</option>
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+            <option value="24px">24px</option>
+        </>
+    );
+
     const novelReaderSettings = (
         <section>
             <h2>Novel Reader</h2>
@@ -117,6 +137,13 @@ const SettingsApp = () => {
                 <Label>Audio Speed:</Label>
                 <Select onChange={updateNovelReaderAudioSpeed} value={novelReaderAudioSpeed}>
                     {speedOptions}
+                </Select>
+            </div>
+
+            <div className="m-[15px]">
+                <Label>Font Size:</Label>
+                <Select onChange={updateNovelReaderFontSize} value={novelReaderFontSize}>
+                    {fontSizeOptions}
                 </Select>
             </div>
         </section>

@@ -10,6 +10,7 @@ interface NovelParagraphProps {
 
 const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex }) => {
     const { novelReaderState, setNovelReaderState } = useContext(NovelReaderContext);
+    const fontSize = localStorage.getItem("novelReader.fontSize") || "16px";
 
     const playTTSByParagraphIndex = (paragraphIndex) => {
         console.log("Playing TTS for paragraph: ", paragraphIndex);
@@ -85,7 +86,7 @@ const NovelParagraph: React.FC<NovelParagraphProps> = ({ paragraphIndex }) => {
             <div className="flex-1 pl-[10px]">
                 <div className={paragraphIndex === novelReaderState.currentlyPlayingParagraph ? "bg-yellow-100" : null}>
                     {novelReaderState.paragraphs[paragraphIndex].map((sentence, idx) => (
-                        <div key={idx}>{sentence}</div>
+                        <div key={idx} style={{ fontSize: fontSize }}>{sentence}</div>
                     ))}
                 </div>
             </div>

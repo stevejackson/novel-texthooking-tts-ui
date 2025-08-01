@@ -19,6 +19,7 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
     const [translatedText, setTranslatedText] = React.useState();
     const [ttsFileUrl, setTtsFileUrl] = React.useState();
     const [autoplay, setAutoplay] = React.useState(localStorage.getItem("novelReader.autoplay") || "false");
+    const fontSize = localStorage.getItem("novelReader.fontSize") || "16px";
     const { novelReaderState, setNovelReaderState } = useContext(NovelReaderContext);
 
     const fetchTts = () => {
@@ -143,13 +144,13 @@ const NovelSelectedTextPopup: React.FC<NovelSelectedTextPopupProps> = (
                         {selectedText && fetchTTSButton}
                     </div>
 
-                    <div className="flex-1">
+                    <div className="flex-1" style={{ fontSize: fontSize }}>
                         {selectedText}
                     </div>
 
                     <VerticalDivider/>
 
-                    <div className="flex-1">
+                    <div className="flex-1" style={{ fontSize: fontSize }}>
                         {translatedText}
                     </div>
 
