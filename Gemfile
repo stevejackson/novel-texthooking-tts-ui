@@ -3,12 +3,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.3'
+ruby '~> 4.0'
 
-gem 'mailgun-ruby', '~> 1.3.5'
+gem 'mailgun-ruby', '~> 1.3'
 gem 'pg', '~> 1.5.9'
 gem 'puma', '~> 6.6.0'
-gem 'rails', '~> 8.0.2'
+gem 'rails', '~> 8.0'
 gem 'turbo-rails', '~> 2.0.13'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'vite_rails', '~> 3.0.19'
